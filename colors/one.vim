@@ -28,8 +28,13 @@ if !exists('g:one_allow_italics')
   let g:one_allow_italics = 0
 endif
 
+let s:italic = ''
+if g:one_allow_italics == 1
+  let s:italic = 'italic'
+endif
+
 if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
-" functions
+  " functions
   " returns an approximate grey index for the given grey level
 
   " Utility functions -------------------------------------------------------{{{
@@ -257,6 +262,26 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
 
   endfun
 
+  " Highlight function
+  function! <sid>hi(group, fg, bg, attr, attrsp)
+    " fg, bg, attr, attrsp
+    if !empty(a:fg)
+      exec "hi " . a:group . " guifg=" .  a:fg[0]
+      exec "hi " . a:group . " ctermfg=" . a:fg[1]
+    endif
+    if !empty(a:bg)
+      exec "hi " . a:group . " guibg=" .  a:bg[0]
+      exec "hi " . a:group . " ctermbg=" . a:bg[1]
+    endif
+    if a:attr != ""
+      exec "hi " . a:group . " gui=" .   a:attr
+      exec "hi " . a:group . " cterm=" . a:attr
+    endif
+    if !empty(a:attrsp)
+      exec "hi " . a:group . " guisp=" . a:attrsp[0]
+    endif
+  endfunction
+
   " }}}
 
 
@@ -325,793 +350,490 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
 
   " }}}
 
-  if &background ==# 'dark'
-    " Dark Italic {{{
-    hi Normal guifg=#abb2bf ctermfg=145 guibg=#282c34 ctermbg=16
-    hi bold gui=bold cterm=bold
-    hi ColorColumn guibg=#2c323c ctermbg=16
-    hi Conceal guifg=#4b5263 ctermfg=59 guibg=#282c34 ctermbg=16
-    hi Cursor guibg=#528bff ctermbg=69
-    hi CursorColumn guibg=#2c323c ctermbg=16
-    hi CursorLine guibg=#2c323c ctermbg=16 gui=none cterm=none
-    hi Directory guifg=#61afef ctermfg=75
-    hi ErrorMsg guifg=#e06c75 ctermfg=168 guibg=#282c34 ctermbg=16 gui=none cterm=none
-    hi VertSplit guifg=#181a1f ctermfg=233 gui=none cterm=none
-    hi Folded guifg=#282c34 ctermfg=16 guibg=#5c6370 ctermbg=59 gui=none cterm=none
-    hi FoldColumn guifg=#5c6370 ctermfg=59 guibg=#2c323c ctermbg=16
-    hi IncSearch guifg=#d19a66 ctermfg=173
-    hi LineNr guifg=#4b5263 ctermfg=59
-    hi CursorLineNr guifg=#abb2bf ctermfg=145 guibg=#2c323c ctermbg=16 gui=none cterm=none
-    hi MatchParen guifg=#e06c75 ctermfg=168 guibg=#2c323c ctermbg=16 gui=underline,bold cterm=underline,bold
-    hi Italic gui=italic cterm=italic
-    hi ModeMsg guifg=#abb2bf ctermfg=145
-    hi MoreMsg guifg=#abb2bf ctermfg=145
-    hi NonText guifg=#5c6370 ctermfg=59 gui=none cterm=none
-    hi PMenu guibg=#333841 ctermbg=16
-    hi PMenuSel guibg=#4b5263 ctermbg=59
-    hi PMenuSbar guibg=#282c34 ctermbg=16
-    hi PMenuThumb guibg=#abb2bf ctermbg=145
-    hi Question guifg=#61afef ctermfg=75
-    hi Search guifg=#282c34 ctermfg=16 guibg=#e5c07b ctermbg=180
-    hi SpecialKey guifg=#3b4048 ctermfg=16 gui=none cterm=none
-    hi Whitespace guifg=#3b4048 ctermfg=16 gui=none cterm=none
-    hi StatusLine guifg=#abb2bf ctermfg=145 guibg=#2c323c ctermbg=16 gui=none cterm=none
-    hi StatusLineNC guifg=#5c6370 ctermfg=59
-    hi TabLine guifg=#abb2bf ctermfg=145 guibg=#282c34 ctermbg=16
-    hi TabLineFill guifg=#5c6370 ctermfg=59 guibg=#3e4452 ctermbg=17 gui=none cterm=none
-    hi TabLineSel guifg=#282c34 ctermfg=16 guibg=#61afef ctermbg=75
-    hi Title guifg=#abb2bf ctermfg=145 gui=bold cterm=bold
-    hi Visual guibg=#3e4452 ctermbg=17
-    hi VisualNOS guibg=#3e4452 ctermbg=17
-    hi WarningMsg guifg=#e06c75 ctermfg=168
-    hi TooLong guifg=#e06c75 ctermfg=168
-    hi WildMenu guifg=#abb2bf ctermfg=145 guibg=#5c6370 ctermbg=59
-    hi SignColumn guibg=#282c34 ctermbg=16
-    hi Special guifg=#61afef ctermfg=75
-    hi helpCommand guifg=#e5c07b ctermfg=180
-    hi helpExample guifg=#e5c07b ctermfg=180
-    hi helpHeader guifg=#abb2bf ctermfg=145 gui=bold cterm=bold
-    hi helpSectionDelim guifg=#5c6370 ctermfg=59
-    hi Comment guifg=#5c6370 ctermfg=59 gui=italic cterm=italic
-    hi Constant guifg=#98c379 ctermfg=114
-    hi String guifg=#98c379 ctermfg=114
-    hi Character guifg=#98c379 ctermfg=114
-    hi Number guifg=#d19a66 ctermfg=173
-    hi Boolean guifg=#d19a66 ctermfg=173
-    hi Float guifg=#d19a66 ctermfg=173
-    hi Identifier guifg=#e06c75 ctermfg=168 gui=none cterm=none
-    hi Function guifg=#61afef ctermfg=75
-    hi Statement guifg=#c678dd ctermfg=176 gui=none cterm=none
-    hi Conditional guifg=#c678dd ctermfg=176
-    hi Repeat guifg=#c678dd ctermfg=176
-    hi Label guifg=#c678dd ctermfg=176
-    hi Operator guifg=#528bff ctermfg=69 gui=none cterm=none
-    hi Keyword guifg=#e06c75 ctermfg=168
-    hi Exception guifg=#c678dd ctermfg=176
-    hi PreProc guifg=#e5c07b ctermfg=180
-    hi Include guifg=#61afef ctermfg=75
-    hi Define guifg=#c678dd ctermfg=176 gui=none cterm=none
-    hi Macro guifg=#c678dd ctermfg=176
-    hi PreCondit guifg=#e5c07b ctermfg=180
-    hi Type guifg=#e5c07b ctermfg=180 gui=none cterm=none
-    hi StorageClass guifg=#e5c07b ctermfg=180
-    hi Structure guifg=#e5c07b ctermfg=180
-    hi Typedef guifg=#e5c07b ctermfg=180
-    hi Special guifg=#61afef ctermfg=75
-    hi Underlined gui=underline cterm=underline
-    hi Error guifg=#e06c75 ctermfg=168 guibg=#282c34 ctermbg=16 gui=bold cterm=bold
-    hi Todo guifg=#c678dd ctermfg=176 guibg=#282c34 ctermbg=16
-    hi DiffAdd guifg=#98c379 ctermfg=114 guibg=#3e4452 ctermbg=17
-    hi DiffChange guifg=#d19a66 ctermfg=173 guibg=#3e4452 ctermbg=17
-    hi DiffDelete guifg=#e06c75 ctermfg=168 guibg=#3e4452 ctermbg=17
-    hi DiffText guifg=#61afef ctermfg=75 guibg=#3e4452 ctermbg=17
-    hi DiffAdded guifg=#98c379 ctermfg=114 guibg=#3e4452 ctermbg=17
-    hi DiffFile guifg=#e06c75 ctermfg=168 guibg=#3e4452 ctermbg=17
-    hi DiffNewFile guifg=#98c379 ctermfg=114 guibg=#3e4452 ctermbg=17
-    hi DiffLine guifg=#61afef ctermfg=75 guibg=#3e4452 ctermbg=17
-    hi DiffRemoved guifg=#e06c75 ctermfg=168 guibg=#3e4452 ctermbg=17
-    hi asciidocListingBlock guifg=#828997 ctermfg=102
-    hi cInclude guifg=#c678dd ctermfg=176
-    hi cPreCondit guifg=#c678dd ctermfg=176
-    hi cPreConditMatch guifg=#c678dd ctermfg=176
-    hi cType guifg=#c678dd ctermfg=176
-    hi cStorageClass guifg=#c678dd ctermfg=176
-    hi cStructure guifg=#c678dd ctermfg=176
-    hi cOperator guifg=#c678dd ctermfg=176
-    hi cStatement guifg=#c678dd ctermfg=176
-    hi cTODO guifg=#c678dd ctermfg=176
-    hi cConstant guifg=#d19a66 ctermfg=173
-    hi cSpecial guifg=#56b6c2 ctermfg=73
-    hi cSpecialCharacter guifg=#56b6c2 ctermfg=73
-    hi cString guifg=#98c379 ctermfg=114
-    hi cppType guifg=#c678dd ctermfg=176
-    hi cppStorageClass guifg=#c678dd ctermfg=176
-    hi cppStructure guifg=#c678dd ctermfg=176
-    hi cppModifier guifg=#c678dd ctermfg=176
-    hi cppOperator guifg=#c678dd ctermfg=176
-    hi cppAccess guifg=#c678dd ctermfg=176
-    hi cppStatement guifg=#c678dd ctermfg=176
-    hi cppConstant guifg=#e06c75 ctermfg=168
-    hi cCppString guifg=#98c379 ctermfg=114
-    hi cucumberGiven guifg=#61afef ctermfg=75
-    hi cucumberWhen guifg=#61afef ctermfg=75
-    hi cucumberWhenAnd guifg=#61afef ctermfg=75
-    hi cucumberThen guifg=#61afef ctermfg=75
-    hi cucumberThenAnd guifg=#61afef ctermfg=75
-    hi cucumberUnparsed guifg=#d19a66 ctermfg=173
-    hi cucumberFeature guifg=#e06c75 ctermfg=168 gui=bold cterm=bold
-    hi cucumberBackground guifg=#c678dd ctermfg=176 gui=bold cterm=bold
-    hi cucumberScenario guifg=#c678dd ctermfg=176 gui=bold cterm=bold
-    hi cucumberScenarioOutline guifg=#c678dd ctermfg=176 gui=bold cterm=bold
-    hi cucumberTags guifg=#5c6370 ctermfg=59 gui=bold cterm=bold
-    hi cucumberDelimiter guifg=#5c6370 ctermfg=59 gui=bold cterm=bold
-    hi cssAttrComma guifg=#c678dd ctermfg=176
-    hi cssAttributeSelector guifg=#98c379 ctermfg=114
-    hi cssBraces guifg=#828997 ctermfg=102
-    hi cssClassName guifg=#d19a66 ctermfg=173
-    hi cssClassNameDot guifg=#d19a66 ctermfg=173
-    hi cssDefinition guifg=#c678dd ctermfg=176
-    hi cssFontAttr guifg=#d19a66 ctermfg=173
-    hi cssFontDescriptor guifg=#c678dd ctermfg=176
-    hi cssFunctionName guifg=#61afef ctermfg=75
-    hi cssIdentifier guifg=#61afef ctermfg=75
-    hi cssImportant guifg=#c678dd ctermfg=176
-    hi cssInclude guifg=#abb2bf ctermfg=145
-    hi cssIncludeKeyword guifg=#c678dd ctermfg=176
-    hi cssMediaType guifg=#d19a66 ctermfg=173
-    hi cssProp guifg=#56b6c2 ctermfg=73
-    hi cssPseudoClassId guifg=#d19a66 ctermfg=173
-    hi cssSelectorOp guifg=#c678dd ctermfg=176
-    hi cssSelectorOp2 guifg=#c678dd ctermfg=176
-    hi cssStringQ guifg=#98c379 ctermfg=114
-    hi cssStringQQ guifg=#98c379 ctermfg=114
-    hi cssTagName guifg=#e06c75 ctermfg=168
-    hi cssAttr guifg=#d19a66 ctermfg=173
-    hi sassAmpersand guifg=#e06c75 ctermfg=168
-    hi sassClass guifg=#e5c07b ctermfg=180
-    hi sassControl guifg=#c678dd ctermfg=176
-    hi sassExtend guifg=#c678dd ctermfg=176
-    hi sassFor guifg=#abb2bf ctermfg=145
-    hi sassProperty guifg=#56b6c2 ctermfg=73
-    hi sassFunction guifg=#56b6c2 ctermfg=73
-    hi sassId guifg=#61afef ctermfg=75
-    hi sassInclude guifg=#c678dd ctermfg=176
-    hi sassMedia guifg=#c678dd ctermfg=176
-    hi sassMediaOperators guifg=#abb2bf ctermfg=145
-    hi sassMixin guifg=#c678dd ctermfg=176
-    hi sassMixinName guifg=#61afef ctermfg=75
-    hi sassMixing guifg=#c678dd ctermfg=176
-    hi scssSelectorName guifg=#e5c07b ctermfg=180
-    hi link elixirModuleDefine Define
-    hi elixirAlias guifg=#e5c07b ctermfg=180
-    hi elixirAtom guifg=#56b6c2 ctermfg=73
-    hi elixirBlockDefinition guifg=#c678dd ctermfg=176
-    hi elixirModuleDeclaration guifg=#d19a66 ctermfg=173
-    hi elixirInclude guifg=#e06c75 ctermfg=168
-    hi elixirOperator guifg=#d19a66 ctermfg=173
-    hi gitcommitComment guifg=#5c6370 ctermfg=59
-    hi gitcommitUnmerged guifg=#98c379 ctermfg=114
-    hi gitcommitBranch guifg=#c678dd ctermfg=176
-    hi gitcommitDiscardedType guifg=#e06c75 ctermfg=168
-    hi gitcommitSelectedType guifg=#98c379 ctermfg=114
-    hi gitcommitUntrackedFile guifg=#56b6c2 ctermfg=73
-    hi gitcommitDiscardedFile guifg=#e06c75 ctermfg=168
-    hi gitcommitSelectedFile guifg=#98c379 ctermfg=114
-    hi gitcommitUnmergedFile guifg=#e5c07b ctermfg=180
-    hi link gitcommitNoBranch       gitcommitBranch
-    hi link gitcommitUntracked      gitcommitComment
-    hi link gitcommitDiscarded      gitcommitComment
-    hi link gitcommitSelected       gitcommitComment
-    hi link gitcommitDiscardedArrow gitcommitDiscardedFile
-    hi link gitcommitSelectedArrow  gitcommitSelectedFile
-    hi link gitcommitUnmergedArrow  gitcommitUnmergedFile
-    hi SignifySignAdd guifg=#98c379 ctermfg=114
-    hi SignifySignChange guifg=#e5c07b ctermfg=180
-    hi SignifySignDelete guifg=#e06c75 ctermfg=168
-    hi link GitGutterAdd    SignifySignAdd
-    hi link GitGutterChange SignifySignChange
-    hi link GitGutterDelete SignifySignDelete
-    hi diffAdded guifg=#98c379 ctermfg=114
-    hi diffRemoved guifg=#e06c75 ctermfg=168
-    hi goDeclaration guifg=#c678dd ctermfg=176
-    hi goField guifg=#e06c75 ctermfg=168
-    hi goMethod guifg=#56b6c2 ctermfg=73
-    hi goType guifg=#c678dd ctermfg=176
-    hi goUnsignedInts guifg=#56b6c2 ctermfg=73
-    hi haskellDeclKeyword guifg=#61afef ctermfg=75
-    hi haskellType guifg=#98c379 ctermfg=114
-    hi haskellWhere guifg=#e06c75 ctermfg=168
-    hi haskellImportKeywords guifg=#61afef ctermfg=75
-    hi haskellOperators guifg=#e06c75 ctermfg=168
-    hi haskellDelimiter guifg=#61afef ctermfg=75
-    hi haskellIdentifier guifg=#d19a66 ctermfg=173
-    hi haskellKeyword guifg=#e06c75 ctermfg=168
-    hi haskellNumber guifg=#56b6c2 ctermfg=73
-    hi haskellString guifg=#56b6c2 ctermfg=73
-    hi htmlArg guifg=#d19a66 ctermfg=173
-    hi htmlTagName guifg=#e06c75 ctermfg=168
-    hi htmlTagN guifg=#e06c75 ctermfg=168
-    hi htmlSpecialTagName guifg=#e06c75 ctermfg=168
-    hi htmlTag guifg=#828997 ctermfg=102
-    hi htmlEndTag guifg=#828997 ctermfg=102
-    hi MatchTag guifg=#e06c75 ctermfg=168 guibg=#2c323c ctermbg=16 gui=underline,bold cterm=underline,bold
-    hi coffeeString guifg=#98c379 ctermfg=114
-    hi javaScriptBraces guifg=#828997 ctermfg=102
-    hi javaScriptFunction guifg=#c678dd ctermfg=176
-    hi javaScriptIdentifier guifg=#c678dd ctermfg=176
-    hi javaScriptNull guifg=#d19a66 ctermfg=173
-    hi javaScriptNumber guifg=#d19a66 ctermfg=173
-    hi javaScriptRequire guifg=#56b6c2 ctermfg=73
-    hi javaScriptReserved guifg=#c678dd ctermfg=176
-    hi jsArrowFunction guifg=#c678dd ctermfg=176
-    hi jsBraces guifg=#828997 ctermfg=102
-    hi jsClassBraces guifg=#828997 ctermfg=102
-    hi jsClassKeywords guifg=#c678dd ctermfg=176
-    hi jsDocParam guifg=#61afef ctermfg=75
-    hi jsDocTags guifg=#c678dd ctermfg=176
-    hi jsFuncBraces guifg=#828997 ctermfg=102
-    hi jsFuncCall guifg=#61afef ctermfg=75
-    hi jsFuncParens guifg=#828997 ctermfg=102
-    hi jsFunction guifg=#c678dd ctermfg=176
-    hi jsGlobalObjects guifg=#e5c07b ctermfg=180
-    hi jsModuleWords guifg=#c678dd ctermfg=176
-    hi jsModules guifg=#c678dd ctermfg=176
-    hi jsNoise guifg=#828997 ctermfg=102
-    hi jsNull guifg=#d19a66 ctermfg=173
-    hi jsOperator guifg=#c678dd ctermfg=176
-    hi jsParens guifg=#828997 ctermfg=102
-    hi jsStorageClass guifg=#c678dd ctermfg=176
-    hi jsTemplateBraces guifg=#be5046 ctermfg=130
-    hi jsTemplateVar guifg=#98c379 ctermfg=114
-    hi jsThis guifg=#e06c75 ctermfg=168
-    hi jsUndefined guifg=#d19a66 ctermfg=173
-    hi jsObjectValue guifg=#61afef ctermfg=75
-    hi jsObjectKey guifg=#56b6c2 ctermfg=73
-    hi jsReturn guifg=#c678dd ctermfg=176
-    hi javascriptArrowFunc guifg=#c678dd ctermfg=176
-    hi javascriptClassExtends guifg=#c678dd ctermfg=176
-    hi javascriptClassKeyword guifg=#c678dd ctermfg=176
-    hi javascriptDocNotation guifg=#c678dd ctermfg=176
-    hi javascriptDocParamName guifg=#61afef ctermfg=75
-    hi javascriptDocTags guifg=#c678dd ctermfg=176
-    hi javascriptEndColons guifg=#5c6370 ctermfg=59
-    hi javascriptExport guifg=#c678dd ctermfg=176
-    hi javascriptFuncArg guifg=#abb2bf ctermfg=145
-    hi javascriptFuncKeyword guifg=#c678dd ctermfg=176
-    hi javascriptIdentifier guifg=#e06c75 ctermfg=168
-    hi javascriptImport guifg=#c678dd ctermfg=176
-    hi javascriptObjectLabel guifg=#abb2bf ctermfg=145
-    hi javascriptOpSymbol guifg=#56b6c2 ctermfg=73
-    hi javascriptOpSymbols guifg=#56b6c2 ctermfg=73
-    hi javascriptPropertyName guifg=#98c379 ctermfg=114
-    hi javascriptTemplateSB guifg=#be5046 ctermfg=130
-    hi javascriptVariable guifg=#c678dd ctermfg=176
-    hi jsonCommentError guifg=#abb2bf ctermfg=145
-    hi jsonKeyword guifg=#e06c75 ctermfg=168
-    hi jsonQuote guifg=#5c6370 ctermfg=59
-    hi jsonTrailingCommaError guifg=#e06c75 ctermfg=168 gui=reverse cterm=reverse
-    hi jsonMissingCommaError guifg=#e06c75 ctermfg=168 gui=reverse cterm=reverse
-    hi jsonNoQuotesError guifg=#e06c75 ctermfg=168 gui=reverse cterm=reverse
-    hi jsonNumError guifg=#e06c75 ctermfg=168 gui=reverse cterm=reverse
-    hi jsonString guifg=#98c379 ctermfg=114
-    hi jsonBoolean guifg=#c678dd ctermfg=176
-    hi jsonNumber guifg=#d19a66 ctermfg=173
-    hi jsonStringSQError guifg=#e06c75 ctermfg=168 gui=reverse cterm=reverse
-    hi jsonSemicolonError guifg=#e06c75 ctermfg=168 gui=reverse cterm=reverse
-    hi markdownUrl guifg=#5c6370 ctermfg=59
-    hi markdownBold guifg=#d19a66 ctermfg=173 gui=bold cterm=bold
-    hi markdownItalic guifg=#d19a66 ctermfg=173 gui=bold cterm=bold
-    hi markdownCode guifg=#98c379 ctermfg=114
-    hi markdownCodeBlock guifg=#e06c75 ctermfg=168
-    hi markdownCodeDelimiter guifg=#98c379 ctermfg=114
-    hi markdownHeadingDelimiter guifg=#be5046 ctermfg=130
-    hi markdownH1 guifg=#e06c75 ctermfg=168
-    hi markdownH2 guifg=#e06c75 ctermfg=168
-    hi markdownH3 guifg=#e06c75 ctermfg=168
-    hi markdownH3 guifg=#e06c75 ctermfg=168
-    hi markdownH4 guifg=#e06c75 ctermfg=168
-    hi markdownH5 guifg=#e06c75 ctermfg=168
-    hi markdownH6 guifg=#e06c75 ctermfg=168
-    hi markdownListMarker guifg=#e06c75 ctermfg=168
-    hi phpClass guifg=#e5c07b ctermfg=180
-    hi phpFunction guifg=#61afef ctermfg=75
-    hi phpFunctions guifg=#61afef ctermfg=75
-    hi phpInclude guifg=#c678dd ctermfg=176
-    hi phpKeyword guifg=#c678dd ctermfg=176
-    hi phpParent guifg=#5c6370 ctermfg=59
-    hi phpType guifg=#c678dd ctermfg=176
-    hi phpSuperGlobals guifg=#e06c75 ctermfg=168
-    hi pugAttributesDelimiter guifg=#d19a66 ctermfg=173
-    hi pugClass guifg=#d19a66 ctermfg=173
-    hi pugDocType guifg=#5c6370 ctermfg=59 gui=italic cterm=italic
-    hi pugTag guifg=#e06c75 ctermfg=168
-    hi purescriptKeyword guifg=#c678dd ctermfg=176
-    hi purescriptModuleName guifg=#abb2bf ctermfg=145
-    hi purescriptIdentifier guifg=#abb2bf ctermfg=145
-    hi purescriptType guifg=#e5c07b ctermfg=180
-    hi purescriptTypeVar guifg=#e06c75 ctermfg=168
-    hi purescriptConstructor guifg=#e06c75 ctermfg=168
-    hi purescriptOperator guifg=#abb2bf ctermfg=145
-    hi pythonImport guifg=#c678dd ctermfg=176
-    hi pythonBuiltin guifg=#56b6c2 ctermfg=73
-    hi pythonStatement guifg=#c678dd ctermfg=176
-    hi pythonParam guifg=#d19a66 ctermfg=173
-    hi pythonEscape guifg=#e06c75 ctermfg=168
-    hi pythonSelf guifg=#828997 ctermfg=102 gui=italic cterm=italic
-    hi pythonClass guifg=#61afef ctermfg=75
-    hi pythonOperator guifg=#c678dd ctermfg=176
-    hi pythonEscape guifg=#e06c75 ctermfg=168
-    hi pythonFunction guifg=#61afef ctermfg=75
-    hi pythonKeyword guifg=#61afef ctermfg=75
-    hi pythonModule guifg=#c678dd ctermfg=176
-    hi pythonStringDelimiter guifg=#98c379 ctermfg=114
-    hi pythonSymbol guifg=#56b6c2 ctermfg=73
-    hi rubyBlock guifg=#c678dd ctermfg=176
-    hi rubyBlockParameter guifg=#e06c75 ctermfg=168
-    hi rubyBlockParameterList guifg=#e06c75 ctermfg=168
-    hi rubyCapitalizedMethod guifg=#c678dd ctermfg=176
-    hi rubyClass guifg=#c678dd ctermfg=176
-    hi rubyConstant guifg=#e5c07b ctermfg=180
-    hi rubyControl guifg=#c678dd ctermfg=176
-    hi rubyDefine guifg=#c678dd ctermfg=176
-    hi rubyEscape guifg=#e06c75 ctermfg=168
-    hi rubyFunction guifg=#61afef ctermfg=75
-    hi rubyGlobalVariable guifg=#e06c75 ctermfg=168
-    hi rubyInclude guifg=#61afef ctermfg=75
-    hi rubyIncluderubyGlobalVariable guifg=#e06c75 ctermfg=168
-    hi rubyInstanceVariable guifg=#e06c75 ctermfg=168
-    hi rubyInterpolation guifg=#56b6c2 ctermfg=73
-    hi rubyInterpolationDelimiter guifg=#e06c75 ctermfg=168
-    hi rubyKeyword guifg=#61afef ctermfg=75
-    hi rubyModule guifg=#c678dd ctermfg=176
-    hi rubyPseudoVariable guifg=#e06c75 ctermfg=168
-    hi rubyRegexp guifg=#56b6c2 ctermfg=73
-    hi rubyRegexpDelimiter guifg=#56b6c2 ctermfg=73
-    hi rubyStringDelimiter guifg=#98c379 ctermfg=114
-    hi rubySymbol guifg=#56b6c2 ctermfg=73
-    hi SpellBad guibg=#282c34 ctermbg=16 gui=undercurl cterm=undercurl
-    hi SpellLocal guibg=#282c34 ctermbg=16 gui=undercurl cterm=undercurl
-    hi SpellCap guibg=#282c34 ctermbg=16 gui=undercurl cterm=undercurl
-    hi SpellRare guibg=#282c34 ctermbg=16 gui=undercurl cterm=undercurl
-    hi vimCommand guifg=#c678dd ctermfg=176
-    hi vimCommentTitle guifg=#5c6370 ctermfg=59 gui=bold cterm=bold
-    hi vimFunction guifg=#56b6c2 ctermfg=73
-    hi vimFuncName guifg=#c678dd ctermfg=176
-    hi vimHighlight guifg=#61afef ctermfg=75
-    hi vimLineComment guifg=#5c6370 ctermfg=59 gui=italic cterm=italic
-    hi vimParenSep guifg=#828997 ctermfg=102
-    hi vimSep guifg=#828997 ctermfg=102
-    hi vimUserFunc guifg=#56b6c2 ctermfg=73
-    hi vimVar guifg=#e06c75 ctermfg=168
-    hi xmlAttrib guifg=#e5c07b ctermfg=180
-    hi xmlEndTag guifg=#e06c75 ctermfg=168
-    hi xmlTag guifg=#e06c75 ctermfg=168
-    hi xmlTagName guifg=#e06c75 ctermfg=168
-    hi zshCommands guifg=#abb2bf ctermfg=145
-    hi zshDeref guifg=#e06c75 ctermfg=168
-    hi zshShortDeref guifg=#e06c75 ctermfg=168
-    hi zshFunction guifg=#56b6c2 ctermfg=73
-    hi zshKeyword guifg=#c678dd ctermfg=176
-    hi zshSubst guifg=#e06c75 ctermfg=168
-    hi zshSubstDelim guifg=#5c6370 ctermfg=59
-    hi zshTypes guifg=#c678dd ctermfg=176
-    hi zshVariableDef guifg=#d19a66 ctermfg=173
-    hi rustExternCrate guifg=#e06c75 ctermfg=168 gui=bold cterm=bold
-    hi rustIdentifier guifg=#61afef ctermfg=75
-    hi rustDeriveTrait guifg=#98c379 ctermfg=114
-    hi SpecialComment guifg=#5c6370 ctermfg=59
-    hi rustCommentLine guifg=#5c6370 ctermfg=59
-    hi rustCommentLineDoc guifg=#5c6370 ctermfg=59
-    hi rustCommentLineDocError guifg=#5c6370 ctermfg=59
-    hi rustCommentBlock guifg=#5c6370 ctermfg=59
-    hi rustCommentBlockDoc guifg=#5c6370 ctermfg=59
-    hi rustCommentBlockDocError guifg=#5c6370 ctermfg=59
-    hi link manTitle String
-    hi manFooter guifg=#5c6370 ctermfg=59
-    hi ALEWarningSign guifg=#e5c07b ctermfg=180
-    hi ALEErrorSign guifg=#e06c75 ctermfg=168
-    "}}}
-    if g:one_allow_italics == 0
-      hi Italic gui=none cterm=none
-      hi Comment guifg=#5c6370 ctermfg=59 gui=none cterm=none
-      hi pugDocType guifg=#5c6370 ctermfg=59 gui=none cterm=none
-      hi pythonSelf guifg=#828997 ctermfg=102 gui=none cterm=none
-      hi vimLineComment guifg=#5c6370 ctermfg=59 gui=none cterm=none
-    endif
-  else
-    " Light Italic {{{
-    hi Normal guifg=#494b53 ctermfg=23 guibg=#fafafa ctermbg=255
-    hi bold gui=bold cterm=bold
-    hi ColorColumn guibg=#f0f0f0 ctermbg=254
-    hi Conceal guifg=#c2c2c3 ctermfg=250 guibg=#fafafa ctermbg=255
-    hi Cursor guibg=#526fff ctermbg=63
-    hi CursorColumn guibg=#f0f0f0 ctermbg=254
-    hi CursorLine guibg=#f0f0f0 ctermbg=254 gui=none cterm=none
-    hi Directory guifg=#4078f2 ctermfg=33
-    hi ErrorMsg guifg=#e45649 ctermfg=166 guibg=#fafafa ctermbg=255 gui=none cterm=none
-    hi VertSplit guifg=#e7e9e1 ctermfg=188 gui=none cterm=none
-    hi Folded guifg=#fafafa ctermfg=255 guibg=#a0a1a7 ctermbg=145 gui=none cterm=none
-    hi FoldColumn guifg=#a0a1a7 ctermfg=145 guibg=#f0f0f0 ctermbg=254
-    hi IncSearch guifg=#986801 ctermfg=94
-    hi LineNr guifg=#c2c2c3 ctermfg=250
-    hi CursorLineNr guifg=#494b53 ctermfg=23 guibg=#f0f0f0 ctermbg=254 gui=none cterm=none
-    hi MatchParen guifg=#e45649 ctermfg=166 guibg=#f0f0f0 ctermbg=254 gui=underline,bold cterm=underline,bold
-    hi Italic gui=italic cterm=italic
-    hi ModeMsg guifg=#494b53 ctermfg=23
-    hi MoreMsg guifg=#494b53 ctermfg=23
-    hi NonText guifg=#a0a1a7 ctermfg=145 gui=none cterm=none
-    hi PMenu guibg=#dfdfdf ctermbg=253
-    hi PMenuSel guibg=#c2c2c3 ctermbg=250
-    hi PMenuSbar guibg=#fafafa ctermbg=255
-    hi PMenuThumb guibg=#494b53 ctermbg=23
-    hi Question guifg=#4078f2 ctermfg=33
-    hi Search guifg=#fafafa ctermfg=255 guibg=#c18401 ctermbg=136
-    hi SpecialKey guifg=#d3d3d3 ctermfg=251 gui=none cterm=none
-    hi Whitespace guifg=#d3d3d3 ctermfg=251 gui=none cterm=none
-    hi StatusLine guifg=#494b53 ctermfg=23 guibg=#f0f0f0 ctermbg=254 gui=none cterm=none
-    hi StatusLineNC guifg=#a0a1a7 ctermfg=145
-    hi TabLine guifg=#494b53 ctermfg=23 guibg=#fafafa ctermbg=255
-    hi TabLineFill guifg=#a0a1a7 ctermfg=145 guibg=#d0d0d0 ctermbg=251 gui=none cterm=none
-    hi TabLineSel guifg=#fafafa ctermfg=255 guibg=#4078f2 ctermbg=33
-    hi Title guifg=#494b53 ctermfg=23 gui=bold cterm=bold
-    hi Visual guibg=#d0d0d0 ctermbg=251
-    hi VisualNOS guibg=#d0d0d0 ctermbg=251
-    hi WarningMsg guifg=#e45649 ctermfg=166
-    hi TooLong guifg=#e45649 ctermfg=166
-    hi WildMenu guifg=#494b53 ctermfg=23 guibg=#a0a1a7 ctermbg=145
-    hi SignColumn guibg=#fafafa ctermbg=255
-    hi Special guifg=#4078f2 ctermfg=33
-    hi helpCommand guifg=#c18401 ctermfg=136
-    hi helpExample guifg=#c18401 ctermfg=136
-    hi helpHeader guifg=#494b53 ctermfg=23 gui=bold cterm=bold
-    hi helpSectionDelim guifg=#a0a1a7 ctermfg=145
-    hi Comment guifg=#a0a1a7 ctermfg=145 gui=italic cterm=italic
-    hi Constant guifg=#50a14f ctermfg=71
-    hi String guifg=#50a14f ctermfg=71
-    hi Character guifg=#50a14f ctermfg=71
-    hi Number guifg=#986801 ctermfg=94
-    hi Boolean guifg=#986801 ctermfg=94
-    hi Float guifg=#986801 ctermfg=94
-    hi Identifier guifg=#e45649 ctermfg=166 gui=none cterm=none
-    hi Function guifg=#4078f2 ctermfg=33
-    hi Statement guifg=#a626a4 ctermfg=127 gui=none cterm=none
-    hi Conditional guifg=#a626a4 ctermfg=127
-    hi Repeat guifg=#a626a4 ctermfg=127
-    hi Label guifg=#a626a4 ctermfg=127
-    hi Operator guifg=#526fff ctermfg=63 gui=none cterm=none
-    hi Keyword guifg=#e45649 ctermfg=166
-    hi Exception guifg=#a626a4 ctermfg=127
-    hi PreProc guifg=#c18401 ctermfg=136
-    hi Include guifg=#4078f2 ctermfg=33
-    hi Define guifg=#a626a4 ctermfg=127 gui=none cterm=none
-    hi Macro guifg=#a626a4 ctermfg=127
-    hi PreCondit guifg=#c18401 ctermfg=136
-    hi Type guifg=#c18401 ctermfg=136 gui=none cterm=none
-    hi StorageClass guifg=#c18401 ctermfg=136
-    hi Structure guifg=#c18401 ctermfg=136
-    hi Typedef guifg=#c18401 ctermfg=136
-    hi Special guifg=#4078f2 ctermfg=33
-    hi Underlined gui=underline cterm=underline
-    hi Error guifg=#e45649 ctermfg=166 guibg=#fafafa ctermbg=255 gui=bold cterm=bold
-    hi Todo guifg=#a626a4 ctermfg=127 guibg=#fafafa ctermbg=255
-    hi DiffAdd guifg=#50a14f ctermfg=71 guibg=#d0d0d0 ctermbg=251
-    hi DiffChange guifg=#986801 ctermfg=94 guibg=#d0d0d0 ctermbg=251
-    hi DiffDelete guifg=#e45649 ctermfg=166 guibg=#d0d0d0 ctermbg=251
-    hi DiffText guifg=#4078f2 ctermfg=33 guibg=#d0d0d0 ctermbg=251
-    hi DiffAdded guifg=#50a14f ctermfg=71 guibg=#d0d0d0 ctermbg=251
-    hi DiffFile guifg=#e45649 ctermfg=166 guibg=#d0d0d0 ctermbg=251
-    hi DiffNewFile guifg=#50a14f ctermfg=71 guibg=#d0d0d0 ctermbg=251
-    hi DiffLine guifg=#4078f2 ctermfg=33 guibg=#d0d0d0 ctermbg=251
-    hi DiffRemoved guifg=#e45649 ctermfg=166 guibg=#d0d0d0 ctermbg=251
-    hi asciidocListingBlock guifg=#696c77 ctermfg=60
-    hi cInclude guifg=#a626a4 ctermfg=127
-    hi cPreCondit guifg=#a626a4 ctermfg=127
-    hi cPreConditMatch guifg=#a626a4 ctermfg=127
-    hi cType guifg=#a626a4 ctermfg=127
-    hi cStorageClass guifg=#a626a4 ctermfg=127
-    hi cStructure guifg=#a626a4 ctermfg=127
-    hi cOperator guifg=#a626a4 ctermfg=127
-    hi cStatement guifg=#a626a4 ctermfg=127
-    hi cTODO guifg=#a626a4 ctermfg=127
-    hi cConstant guifg=#986801 ctermfg=94
-    hi cSpecial guifg=#0184bc ctermfg=31
-    hi cSpecialCharacter guifg=#0184bc ctermfg=31
-    hi cString guifg=#50a14f ctermfg=71
-    hi cppType guifg=#a626a4 ctermfg=127
-    hi cppStorageClass guifg=#a626a4 ctermfg=127
-    hi cppStructure guifg=#a626a4 ctermfg=127
-    hi cppModifier guifg=#a626a4 ctermfg=127
-    hi cppOperator guifg=#a626a4 ctermfg=127
-    hi cppAccess guifg=#a626a4 ctermfg=127
-    hi cppStatement guifg=#a626a4 ctermfg=127
-    hi cppConstant guifg=#e45649 ctermfg=166
-    hi cCppString guifg=#50a14f ctermfg=71
-    hi cucumberGiven guifg=#4078f2 ctermfg=33
-    hi cucumberWhen guifg=#4078f2 ctermfg=33
-    hi cucumberWhenAnd guifg=#4078f2 ctermfg=33
-    hi cucumberThen guifg=#4078f2 ctermfg=33
-    hi cucumberThenAnd guifg=#4078f2 ctermfg=33
-    hi cucumberUnparsed guifg=#986801 ctermfg=94
-    hi cucumberFeature guifg=#e45649 ctermfg=166 gui=bold cterm=bold
-    hi cucumberBackground guifg=#a626a4 ctermfg=127 gui=bold cterm=bold
-    hi cucumberScenario guifg=#a626a4 ctermfg=127 gui=bold cterm=bold
-    hi cucumberScenarioOutline guifg=#a626a4 ctermfg=127 gui=bold cterm=bold
-    hi cucumberTags guifg=#a0a1a7 ctermfg=145 gui=bold cterm=bold
-    hi cucumberDelimiter guifg=#a0a1a7 ctermfg=145 gui=bold cterm=bold
-    hi cssAttrComma guifg=#a626a4 ctermfg=127
-    hi cssAttributeSelector guifg=#50a14f ctermfg=71
-    hi cssBraces guifg=#696c77 ctermfg=60
-    hi cssClassName guifg=#986801 ctermfg=94
-    hi cssClassNameDot guifg=#986801 ctermfg=94
-    hi cssDefinition guifg=#a626a4 ctermfg=127
-    hi cssFontAttr guifg=#986801 ctermfg=94
-    hi cssFontDescriptor guifg=#a626a4 ctermfg=127
-    hi cssFunctionName guifg=#4078f2 ctermfg=33
-    hi cssIdentifier guifg=#4078f2 ctermfg=33
-    hi cssImportant guifg=#a626a4 ctermfg=127
-    hi cssInclude guifg=#494b53 ctermfg=23
-    hi cssIncludeKeyword guifg=#a626a4 ctermfg=127
-    hi cssMediaType guifg=#986801 ctermfg=94
-    hi cssProp guifg=#0184bc ctermfg=31
-    hi cssPseudoClassId guifg=#986801 ctermfg=94
-    hi cssSelectorOp guifg=#a626a4 ctermfg=127
-    hi cssSelectorOp2 guifg=#a626a4 ctermfg=127
-    hi cssStringQ guifg=#50a14f ctermfg=71
-    hi cssStringQQ guifg=#50a14f ctermfg=71
-    hi cssTagName guifg=#e45649 ctermfg=166
-    hi cssAttr guifg=#986801 ctermfg=94
-    hi sassAmpersand guifg=#e45649 ctermfg=166
-    hi sassClass guifg=#c18401 ctermfg=136
-    hi sassControl guifg=#a626a4 ctermfg=127
-    hi sassExtend guifg=#a626a4 ctermfg=127
-    hi sassFor guifg=#494b53 ctermfg=23
-    hi sassProperty guifg=#0184bc ctermfg=31
-    hi sassFunction guifg=#0184bc ctermfg=31
-    hi sassId guifg=#4078f2 ctermfg=33
-    hi sassInclude guifg=#a626a4 ctermfg=127
-    hi sassMedia guifg=#a626a4 ctermfg=127
-    hi sassMediaOperators guifg=#494b53 ctermfg=23
-    hi sassMixin guifg=#a626a4 ctermfg=127
-    hi sassMixinName guifg=#4078f2 ctermfg=33
-    hi sassMixing guifg=#a626a4 ctermfg=127
-    hi scssSelectorName guifg=#c18401 ctermfg=136
-    hi link elixirModuleDefine Define
-    hi elixirAlias guifg=#c18401 ctermfg=136
-    hi elixirAtom guifg=#0184bc ctermfg=31
-    hi elixirBlockDefinition guifg=#a626a4 ctermfg=127
-    hi elixirModuleDeclaration guifg=#986801 ctermfg=94
-    hi elixirInclude guifg=#e45649 ctermfg=166
-    hi elixirOperator guifg=#986801 ctermfg=94
-    hi gitcommitComment guifg=#a0a1a7 ctermfg=145
-    hi gitcommitUnmerged guifg=#50a14f ctermfg=71
-    hi gitcommitBranch guifg=#a626a4 ctermfg=127
-    hi gitcommitDiscardedType guifg=#e45649 ctermfg=166
-    hi gitcommitSelectedType guifg=#50a14f ctermfg=71
-    hi gitcommitUntrackedFile guifg=#0184bc ctermfg=31
-    hi gitcommitDiscardedFile guifg=#e45649 ctermfg=166
-    hi gitcommitSelectedFile guifg=#50a14f ctermfg=71
-    hi gitcommitUnmergedFile guifg=#c18401 ctermfg=136
-    hi link gitcommitNoBranch       gitcommitBranch
-    hi link gitcommitUntracked      gitcommitComment
-    hi link gitcommitDiscarded      gitcommitComment
-    hi link gitcommitSelected       gitcommitComment
-    hi link gitcommitDiscardedArrow gitcommitDiscardedFile
-    hi link gitcommitSelectedArrow  gitcommitSelectedFile
-    hi link gitcommitUnmergedArrow  gitcommitUnmergedFile
-    hi SignifySignAdd guifg=#50a14f ctermfg=71
-    hi SignifySignChange guifg=#c18401 ctermfg=136
-    hi SignifySignDelete guifg=#e45649 ctermfg=166
-    hi link GitGutterAdd    SignifySignAdd
-    hi link GitGutterChange SignifySignChange
-    hi link GitGutterDelete SignifySignDelete
-    hi diffAdded guifg=#50a14f ctermfg=71
-    hi diffRemoved guifg=#e45649 ctermfg=166
-    hi goDeclaration guifg=#a626a4 ctermfg=127
-    hi goField guifg=#e45649 ctermfg=166
-    hi goMethod guifg=#0184bc ctermfg=31
-    hi goType guifg=#a626a4 ctermfg=127
-    hi goUnsignedInts guifg=#0184bc ctermfg=31
-    hi haskellDeclKeyword guifg=#4078f2 ctermfg=33
-    hi haskellType guifg=#50a14f ctermfg=71
-    hi haskellWhere guifg=#e45649 ctermfg=166
-    hi haskellImportKeywords guifg=#4078f2 ctermfg=33
-    hi haskellOperators guifg=#e45649 ctermfg=166
-    hi haskellDelimiter guifg=#4078f2 ctermfg=33
-    hi haskellIdentifier guifg=#986801 ctermfg=94
-    hi haskellKeyword guifg=#e45649 ctermfg=166
-    hi haskellNumber guifg=#0184bc ctermfg=31
-    hi haskellString guifg=#0184bc ctermfg=31
-    hi htmlArg guifg=#986801 ctermfg=94
-    hi htmlTagName guifg=#e45649 ctermfg=166
-    hi htmlTagN guifg=#e45649 ctermfg=166
-    hi htmlSpecialTagName guifg=#e45649 ctermfg=166
-    hi htmlTag guifg=#696c77 ctermfg=60
-    hi htmlEndTag guifg=#696c77 ctermfg=60
-    hi MatchTag guifg=#e45649 ctermfg=166 guibg=#f0f0f0 ctermbg=254 gui=underline,bold cterm=underline,bold
-    hi coffeeString guifg=#50a14f ctermfg=71
-    hi javaScriptBraces guifg=#696c77 ctermfg=60
-    hi javaScriptFunction guifg=#a626a4 ctermfg=127
-    hi javaScriptIdentifier guifg=#a626a4 ctermfg=127
-    hi javaScriptNull guifg=#986801 ctermfg=94
-    hi javaScriptNumber guifg=#986801 ctermfg=94
-    hi javaScriptRequire guifg=#0184bc ctermfg=31
-    hi javaScriptReserved guifg=#a626a4 ctermfg=127
-    hi jsArrowFunction guifg=#a626a4 ctermfg=127
-    hi jsBraces guifg=#696c77 ctermfg=60
-    hi jsClassBraces guifg=#696c77 ctermfg=60
-    hi jsClassKeywords guifg=#a626a4 ctermfg=127
-    hi jsDocParam guifg=#4078f2 ctermfg=33
-    hi jsDocTags guifg=#a626a4 ctermfg=127
-    hi jsFuncBraces guifg=#696c77 ctermfg=60
-    hi jsFuncCall guifg=#4078f2 ctermfg=33
-    hi jsFuncParens guifg=#696c77 ctermfg=60
-    hi jsFunction guifg=#a626a4 ctermfg=127
-    hi jsGlobalObjects guifg=#c18401 ctermfg=136
-    hi jsModuleWords guifg=#a626a4 ctermfg=127
-    hi jsModules guifg=#a626a4 ctermfg=127
-    hi jsNoise guifg=#696c77 ctermfg=60
-    hi jsNull guifg=#986801 ctermfg=94
-    hi jsOperator guifg=#a626a4 ctermfg=127
-    hi jsParens guifg=#696c77 ctermfg=60
-    hi jsStorageClass guifg=#a626a4 ctermfg=127
-    hi jsTemplateBraces guifg=#ca1243 ctermfg=160
-    hi jsTemplateVar guifg=#50a14f ctermfg=71
-    hi jsThis guifg=#e45649 ctermfg=166
-    hi jsUndefined guifg=#986801 ctermfg=94
-    hi jsObjectValue guifg=#4078f2 ctermfg=33
-    hi jsObjectKey guifg=#0184bc ctermfg=31
-    hi jsReturn guifg=#a626a4 ctermfg=127
-    hi javascriptArrowFunc guifg=#a626a4 ctermfg=127
-    hi javascriptClassExtends guifg=#a626a4 ctermfg=127
-    hi javascriptClassKeyword guifg=#a626a4 ctermfg=127
-    hi javascriptDocNotation guifg=#a626a4 ctermfg=127
-    hi javascriptDocParamName guifg=#4078f2 ctermfg=33
-    hi javascriptDocTags guifg=#a626a4 ctermfg=127
-    hi javascriptEndColons guifg=#a0a1a7 ctermfg=145
-    hi javascriptExport guifg=#a626a4 ctermfg=127
-    hi javascriptFuncArg guifg=#494b53 ctermfg=23
-    hi javascriptFuncKeyword guifg=#a626a4 ctermfg=127
-    hi javascriptIdentifier guifg=#e45649 ctermfg=166
-    hi javascriptImport guifg=#a626a4 ctermfg=127
-    hi javascriptObjectLabel guifg=#494b53 ctermfg=23
-    hi javascriptOpSymbol guifg=#0184bc ctermfg=31
-    hi javascriptOpSymbols guifg=#0184bc ctermfg=31
-    hi javascriptPropertyName guifg=#50a14f ctermfg=71
-    hi javascriptTemplateSB guifg=#ca1243 ctermfg=160
-    hi javascriptVariable guifg=#a626a4 ctermfg=127
-    hi jsonCommentError guifg=#494b53 ctermfg=23
-    hi jsonKeyword guifg=#e45649 ctermfg=166
-    hi jsonQuote guifg=#a0a1a7 ctermfg=145
-    hi jsonTrailingCommaError guifg=#e45649 ctermfg=166 gui=reverse cterm=reverse
-    hi jsonMissingCommaError guifg=#e45649 ctermfg=166 gui=reverse cterm=reverse
-    hi jsonNoQuotesError guifg=#e45649 ctermfg=166 gui=reverse cterm=reverse
-    hi jsonNumError guifg=#e45649 ctermfg=166 gui=reverse cterm=reverse
-    hi jsonString guifg=#50a14f ctermfg=71
-    hi jsonBoolean guifg=#a626a4 ctermfg=127
-    hi jsonNumber guifg=#986801 ctermfg=94
-    hi jsonStringSQError guifg=#e45649 ctermfg=166 gui=reverse cterm=reverse
-    hi jsonSemicolonError guifg=#e45649 ctermfg=166 gui=reverse cterm=reverse
-    hi markdownUrl guifg=#a0a1a7 ctermfg=145
-    hi markdownBold guifg=#986801 ctermfg=94 gui=bold cterm=bold
-    hi markdownItalic guifg=#986801 ctermfg=94 gui=bold cterm=bold
-    hi markdownCode guifg=#50a14f ctermfg=71
-    hi markdownCodeBlock guifg=#e45649 ctermfg=166
-    hi markdownCodeDelimiter guifg=#50a14f ctermfg=71
-    hi markdownHeadingDelimiter guifg=#ca1243 ctermfg=160
-    hi markdownH1 guifg=#e45649 ctermfg=166
-    hi markdownH2 guifg=#e45649 ctermfg=166
-    hi markdownH3 guifg=#e45649 ctermfg=166
-    hi markdownH3 guifg=#e45649 ctermfg=166
-    hi markdownH4 guifg=#e45649 ctermfg=166
-    hi markdownH5 guifg=#e45649 ctermfg=166
-    hi markdownH6 guifg=#e45649 ctermfg=166
-    hi markdownListMarker guifg=#e45649 ctermfg=166
-    hi phpClass guifg=#c18401 ctermfg=136
-    hi phpFunction guifg=#4078f2 ctermfg=33
-    hi phpFunctions guifg=#4078f2 ctermfg=33
-    hi phpInclude guifg=#a626a4 ctermfg=127
-    hi phpKeyword guifg=#a626a4 ctermfg=127
-    hi phpParent guifg=#a0a1a7 ctermfg=145
-    hi phpType guifg=#a626a4 ctermfg=127
-    hi phpSuperGlobals guifg=#e45649 ctermfg=166
-    hi pugAttributesDelimiter guifg=#986801 ctermfg=94
-    hi pugClass guifg=#986801 ctermfg=94
-    hi pugDocType guifg=#a0a1a7 ctermfg=145 gui=italic cterm=italic
-    hi pugTag guifg=#e45649 ctermfg=166
-    hi purescriptKeyword guifg=#a626a4 ctermfg=127
-    hi purescriptModuleName guifg=#494b53 ctermfg=23
-    hi purescriptIdentifier guifg=#494b53 ctermfg=23
-    hi purescriptType guifg=#c18401 ctermfg=136
-    hi purescriptTypeVar guifg=#e45649 ctermfg=166
-    hi purescriptConstructor guifg=#e45649 ctermfg=166
-    hi purescriptOperator guifg=#494b53 ctermfg=23
-    hi pythonImport guifg=#a626a4 ctermfg=127
-    hi pythonBuiltin guifg=#0184bc ctermfg=31
-    hi pythonStatement guifg=#a626a4 ctermfg=127
-    hi pythonParam guifg=#986801 ctermfg=94
-    hi pythonEscape guifg=#e45649 ctermfg=166
-    hi pythonSelf guifg=#696c77 ctermfg=60 gui=italic cterm=italic
-    hi pythonClass guifg=#4078f2 ctermfg=33
-    hi pythonOperator guifg=#a626a4 ctermfg=127
-    hi pythonEscape guifg=#e45649 ctermfg=166
-    hi pythonFunction guifg=#4078f2 ctermfg=33
-    hi pythonKeyword guifg=#4078f2 ctermfg=33
-    hi pythonModule guifg=#a626a4 ctermfg=127
-    hi pythonStringDelimiter guifg=#50a14f ctermfg=71
-    hi pythonSymbol guifg=#0184bc ctermfg=31
-    hi rubyBlock guifg=#a626a4 ctermfg=127
-    hi rubyBlockParameter guifg=#e45649 ctermfg=166
-    hi rubyBlockParameterList guifg=#e45649 ctermfg=166
-    hi rubyCapitalizedMethod guifg=#a626a4 ctermfg=127
-    hi rubyClass guifg=#a626a4 ctermfg=127
-    hi rubyConstant guifg=#c18401 ctermfg=136
-    hi rubyControl guifg=#a626a4 ctermfg=127
-    hi rubyDefine guifg=#a626a4 ctermfg=127
-    hi rubyEscape guifg=#e45649 ctermfg=166
-    hi rubyFunction guifg=#4078f2 ctermfg=33
-    hi rubyGlobalVariable guifg=#e45649 ctermfg=166
-    hi rubyInclude guifg=#4078f2 ctermfg=33
-    hi rubyIncluderubyGlobalVariable guifg=#e45649 ctermfg=166
-    hi rubyInstanceVariable guifg=#e45649 ctermfg=166
-    hi rubyInterpolation guifg=#0184bc ctermfg=31
-    hi rubyInterpolationDelimiter guifg=#e45649 ctermfg=166
-    hi rubyKeyword guifg=#4078f2 ctermfg=33
-    hi rubyModule guifg=#a626a4 ctermfg=127
-    hi rubyPseudoVariable guifg=#e45649 ctermfg=166
-    hi rubyRegexp guifg=#0184bc ctermfg=31
-    hi rubyRegexpDelimiter guifg=#0184bc ctermfg=31
-    hi rubyStringDelimiter guifg=#50a14f ctermfg=71
-    hi rubySymbol guifg=#0184bc ctermfg=31
-    hi SpellBad guibg=#fafafa ctermbg=255 gui=undercurl cterm=undercurl
-    hi SpellLocal guibg=#fafafa ctermbg=255 gui=undercurl cterm=undercurl
-    hi SpellCap guibg=#fafafa ctermbg=255 gui=undercurl cterm=undercurl
-    hi SpellRare guibg=#fafafa ctermbg=255 gui=undercurl cterm=undercurl
-    hi vimCommand guifg=#a626a4 ctermfg=127
-    hi vimCommentTitle guifg=#a0a1a7 ctermfg=145 gui=bold cterm=bold
-    hi vimFunction guifg=#0184bc ctermfg=31
-    hi vimFuncName guifg=#a626a4 ctermfg=127
-    hi vimHighlight guifg=#4078f2 ctermfg=33
-    hi vimLineComment guifg=#a0a1a7 ctermfg=145 gui=italic cterm=italic
-    hi vimParenSep guifg=#696c77 ctermfg=60
-    hi vimSep guifg=#696c77 ctermfg=60
-    hi vimUserFunc guifg=#0184bc ctermfg=31
-    hi vimVar guifg=#e45649 ctermfg=166
-    hi xmlAttrib guifg=#c18401 ctermfg=136
-    hi xmlEndTag guifg=#e45649 ctermfg=166
-    hi xmlTag guifg=#e45649 ctermfg=166
-    hi xmlTagName guifg=#e45649 ctermfg=166
-    hi zshCommands guifg=#494b53 ctermfg=23
-    hi zshDeref guifg=#e45649 ctermfg=166
-    hi zshShortDeref guifg=#e45649 ctermfg=166
-    hi zshFunction guifg=#0184bc ctermfg=31
-    hi zshKeyword guifg=#a626a4 ctermfg=127
-    hi zshSubst guifg=#e45649 ctermfg=166
-    hi zshSubstDelim guifg=#a0a1a7 ctermfg=145
-    hi zshTypes guifg=#a626a4 ctermfg=127
-    hi zshVariableDef guifg=#986801 ctermfg=94
-    hi rustExternCrate guifg=#e45649 ctermfg=166 gui=bold cterm=bold
-    hi rustIdentifier guifg=#4078f2 ctermfg=33
-    hi rustDeriveTrait guifg=#50a14f ctermfg=71
-    hi SpecialComment guifg=#a0a1a7 ctermfg=145
-    hi rustCommentLine guifg=#a0a1a7 ctermfg=145
-    hi rustCommentLineDoc guifg=#a0a1a7 ctermfg=145
-    hi rustCommentLineDocError guifg=#a0a1a7 ctermfg=145
-    hi rustCommentBlock guifg=#a0a1a7 ctermfg=145
-    hi rustCommentBlockDoc guifg=#a0a1a7 ctermfg=145
-    hi rustCommentBlockDocError guifg=#a0a1a7 ctermfg=145
-    hi link manTitle String
-    hi manFooter guifg=#a0a1a7 ctermfg=145
-    hi ALEWarningSign guifg=#c18401 ctermfg=136
-    hi ALEErrorSign guifg=#e45649 ctermfg=166
-    "}}}
-    if g:one_allow_italics == 0
-      hi Italic gui=none cterm=none
-      hi Comment guifg=#a0a1a7 ctermfg=145 gui=none cterm=none
-      hi pugDocType guifg=#a0a1a7 ctermfg=145 gui=none cterm=none
-      hi pythonSelf guifg=#696c77 ctermfg=60 gui=none cterm=none
-      hi vimLineComment guifg=#a0a1a7 ctermfg=145 gui=none cterm=none
-    endif
-  endif
+  " Vim editor color --------------------------------------------------------{{{
+  call <sid>hi('Normal',       s:syntax_fg,     s:syntax_bg,      '', '')
+  call <sid>hi('bold',         '',              '',               'bold', '')
+  call <sid>hi('ColorColumn',  '',              s:syntax_cursor,  '', '')
+  call <sid>hi('Conceal',      s:mono_4,        s:syntax_bg,      '', '')
+  call <sid>hi('Cursor',       '',              s:syntax_accent,  '', '')
+  call <sid>hi('CursorIM',     '',              '',               '', '')
+  call <sid>hi('CursorColumn', '',              s:syntax_cursor,  '', '')
+  call <sid>hi('CursorLine',   '',              s:syntax_cursor,  'none', '')
+  call <sid>hi('Directory',    s:hue_2,         '',               '', '')
+  call <sid>hi('ErrorMsg',     s:hue_5,         s:syntax_bg,      'none', '')
+  call <sid>hi('VertSplit',    s:vertsplit,     '',               'none', '')
+  call <sid>hi('Folded',       s:syntax_bg,     s:syntax_fold_bg, 'none', '')
+  call <sid>hi('FoldColumn',   s:mono_3,        s:syntax_cursor,  '', '')
+  call <sid>hi('IncSearch',    s:hue_6,         '',               '', '')
+  call <sid>hi('LineNr',       s:mono_4,        '',               '', '')
+  call <sid>hi('CursorLineNr', s:syntax_fg,     s:syntax_cursor,  'none', '')
+  call <sid>hi('MatchParen',   s:hue_5,         s:syntax_cursor,  'underline,bold', '')
+  call <sid>hi('Italic',       '',              '',               s:italic, '')
+  call <sid>hi('ModeMsg',      s:syntax_fg,     '',               '', '')
+  call <sid>hi('MoreMsg',      s:syntax_fg,     '',               '', '')
+  call <sid>hi('NonText',      s:mono_3,        '',               'none', '')
+  call <sid>hi('PMenu',        '',              s:pmenu,          '', '')
+  call <sid>hi('PMenuSel',     '',              s:mono_4,         '', '')
+  call <sid>hi('PMenuSbar',    '',              s:syntax_bg,      '', '')
+  call <sid>hi('PMenuThumb',   '',              s:mono_1,         '', '')
+  call <sid>hi('Question',     s:hue_2,         '',               '', '')
+  call <sid>hi('Search',       s:syntax_bg,     s:hue_6_2,        '', '')
+  call <sid>hi('SpecialKey',   s:special_grey,  '',               'none', '')
+  call <sid>hi('Whitespace',   s:special_grey,  '',               'none', '')
+  call <sid>hi('StatusLine',   s:syntax_fg,     s:syntax_cursor,  'none', '')
+  call <sid>hi('StatusLineNC', s:mono_3,        '',               '', '')
+  call <sid>hi('TabLine',      s:mono_1,        s:syntax_bg,      '', '')
+  call <sid>hi('TabLineFill',  s:mono_3,        s:visual_grey,    'none', '')
+  call <sid>hi('TabLineSel',   s:syntax_bg,     s:hue_2,          '', '')
+  call <sid>hi('Title',        s:syntax_fg,     '',               'bold', '')
+  call <sid>hi('Visual',       '',              s:visual_grey,    '', '')
+  call <sid>hi('VisualNOS',    '',              s:visual_grey,    '', '')
+  call <sid>hi('WarningMsg',   s:hue_5,         '',               '', '')
+  call <sid>hi('TooLong',      s:hue_5,         '',               '', '')
+  call <sid>hi('WildMenu',     s:syntax_fg,     s:mono_3,         '', '')
+  call <sid>hi('SignColumn',   '',              s:syntax_bg,      '', '')
+  call <sid>hi('Special',      s:hue_2,         '',               '', '')
+  " }}}
+
+  " Vim Help highlighting ---------------------------------------------------{{{
+  call <sid>hi('helpCommand',      s:hue_6_2, '', '', '')
+  call <sid>hi('helpExample',      s:hue_6_2, '', '', '')
+  call <sid>hi('helpHeader',       s:mono_1,  '', 'bold', '')
+  call <sid>hi('helpSectionDelim', s:mono_3,  '', '', '')
+  " }}}
+
+  " Standard syntax highlighting --------------------------------------------{{{
+  call <sid>hi('Comment',        s:mono_3,        '',          s:italic, '')
+  call <sid>hi('Constant',       s:hue_4,         '',          '', '')
+  call <sid>hi('String',         s:hue_4,         '',          '', '')
+  call <sid>hi('Character',      s:hue_4,         '',          '', '')
+  call <sid>hi('Number',         s:hue_6,         '',          '', '')
+  call <sid>hi('Boolean',        s:hue_6,         '',          '', '')
+  call <sid>hi('Float',          s:hue_6,         '',          '', '')
+  call <sid>hi('Identifier',     s:hue_5,         '',          'none', '')
+  call <sid>hi('Function',       s:hue_2,         '',          '', '')
+  call <sid>hi('Statement',      s:hue_3,         '',          'none', '')
+  call <sid>hi('Conditional',    s:hue_3,         '',          '', '')
+  call <sid>hi('Repeat',         s:hue_3,         '',          '', '')
+  call <sid>hi('Label',          s:hue_3,         '',          '', '')
+  call <sid>hi('Operator',       s:syntax_accent, '',          'none', '')
+  call <sid>hi('Keyword',        s:hue_5,         '',          '', '')
+  call <sid>hi('Exception',      s:hue_3,         '',          '', '')
+  call <sid>hi('PreProc',        s:hue_6_2,       '',          '', '')
+  call <sid>hi('Include',        s:hue_2,         '',          '', '')
+  call <sid>hi('Define',         s:hue_3,         '',          'none', '')
+  call <sid>hi('Macro',          s:hue_3,         '',          '', '')
+  call <sid>hi('PreCondit',      s:hue_6_2,       '',          '', '')
+  call <sid>hi('Type',           s:hue_6_2,       '',          'none', '')
+  call <sid>hi('StorageClass',   s:hue_6_2,       '',          '', '')
+  call <sid>hi('Structure',      s:hue_6_2,       '',          '', '')
+  call <sid>hi('Typedef',        s:hue_6_2,       '',          '', '')
+  call <sid>hi('Special',        s:hue_2,         '',          '', '')
+  call <sid>hi('SpecialChar',    '',              '',          '', '')
+  call <sid>hi('Tag',            '',              '',          '', '')
+  call <sid>hi('Delimiter',      '',              '',          '', '')
+  call <sid>hi('SpecialComment', '',              '',          '', '')
+  call <sid>hi('Debug',          '',              '',          '', '')
+  call <sid>hi('Underlined',     '',              '',          'underline', '')
+  call <sid>hi('Ignore',         '',              '',          '', '')
+  call <sid>hi('Error',          s:hue_5,         s:syntax_bg, 'bold', '')
+  call <sid>hi('Todo',           s:hue_3,         s:syntax_bg, '', '')
+  " }}}
+
+  " Diff highlighting -------------------------------------------------------{{{
+  call <sid>hi('DiffAdd',     s:hue_4, s:visual_grey, '', '')
+  call <sid>hi('DiffChange',  s:hue_6, s:visual_grey, '', '')
+  call <sid>hi('DiffDelete',  s:hue_5, s:visual_grey, '', '')
+  call <sid>hi('DiffText',    s:hue_2, s:visual_grey, '', '')
+  call <sid>hi('DiffAdded',   s:hue_4, s:visual_grey, '', '')
+  call <sid>hi('DiffFile',    s:hue_5, s:visual_grey, '', '')
+  call <sid>hi('DiffNewFile', s:hue_4, s:visual_grey, '', '')
+  call <sid>hi('DiffLine',    s:hue_2, s:visual_grey, '', '')
+  call <sid>hi('DiffRemoved', s:hue_5, s:visual_grey, '', '')
+  " }}}
+
+  " Asciidoc highlighting ---------------------------------------------------{{{
+  call <sid>hi('asciidocListingBlock',   s:mono_2,  '', '', '')
+  " }}}
+
+  " C/C++ highlighting ------------------------------------------------------{{{
+  call <sid>hi('cInclude',           s:hue_3,  '', '', '')
+  call <sid>hi('cPreCondit',         s:hue_3,  '', '', '')
+  call <sid>hi('cPreConditMatch',    s:hue_3,  '', '', '')
+
+  call <sid>hi('cType',              s:hue_3,  '', '', '')
+  call <sid>hi('cStorageClass',      s:hue_3,  '', '', '')
+  call <sid>hi('cStructure',         s:hue_3,  '', '', '')
+  call <sid>hi('cOperator',          s:hue_3,  '', '', '')
+  call <sid>hi('cStatement',         s:hue_3,  '', '', '')
+  call <sid>hi('cTODO',              s:hue_3,  '', '', '')
+  call <sid>hi('cConstant',          s:hue_6,  '', '', '')
+  call <sid>hi('cSpecial',           s:hue_1,  '', '', '')
+  call <sid>hi('cSpecialCharacter',  s:hue_1,  '', '', '')
+  call <sid>hi('cString',            s:hue_4,  '', '', '')
+
+  call <sid>hi('cppType',            s:hue_3,  '', '', '')
+  call <sid>hi('cppStorageClass',    s:hue_3,  '', '', '')
+  call <sid>hi('cppStructure',       s:hue_3,  '', '', '')
+  call <sid>hi('cppModifier',        s:hue_3,  '', '', '')
+  call <sid>hi('cppOperator',        s:hue_3,  '', '', '')
+  call <sid>hi('cppAccess',          s:hue_3,  '', '', '')
+  call <sid>hi('cppStatement',       s:hue_3,  '', '', '')
+  call <sid>hi('cppConstant',        s:hue_5,  '', '', '')
+  call <sid>hi('cCppString',         s:hue_4,  '', '', '')
+  " }}}
+
+  " Cucumber highlighting ---------------------------------------------------{{{
+  call <sid>hi('cucumberGiven',           s:hue_2,  '', '', '')
+  call <sid>hi('cucumberWhen',            s:hue_2,  '', '', '')
+  call <sid>hi('cucumberWhenAnd',         s:hue_2,  '', '', '')
+  call <sid>hi('cucumberThen',            s:hue_2,  '', '', '')
+  call <sid>hi('cucumberThenAnd',         s:hue_2,  '', '', '')
+  call <sid>hi('cucumberUnparsed',        s:hue_6,  '', '', '')
+  call <sid>hi('cucumberFeature',         s:hue_5,  '', 'bold', '')
+  call <sid>hi('cucumberBackground',      s:hue_3,  '', 'bold', '')
+  call <sid>hi('cucumberScenario',        s:hue_3,  '', 'bold', '')
+  call <sid>hi('cucumberScenarioOutline', s:hue_3,  '', 'bold', '')
+  call <sid>hi('cucumberTags',            s:mono_3, '', 'bold', '')
+  call <sid>hi('cucumberDelimiter',       s:mono_3, '', 'bold', '')
+  " }}}
+
+  " CSS/Sass highlighting ---------------------------------------------------{{{
+  call <sid>hi('cssAttrComma',         s:hue_3,  '', '', '')
+  call <sid>hi('cssAttributeSelector', s:hue_4,  '', '', '')
+  call <sid>hi('cssBraces',            s:mono_2, '', '', '')
+  call <sid>hi('cssClassName',         s:hue_6,  '', '', '')
+  call <sid>hi('cssClassNameDot',      s:hue_6,  '', '', '')
+  call <sid>hi('cssDefinition',        s:hue_3,  '', '', '')
+  call <sid>hi('cssFontAttr',          s:hue_6,  '', '', '')
+  call <sid>hi('cssFontDescriptor',    s:hue_3,  '', '', '')
+  call <sid>hi('cssFunctionName',      s:hue_2,  '', '', '')
+  call <sid>hi('cssIdentifier',        s:hue_2,  '', '', '')
+  call <sid>hi('cssImportant',         s:hue_3,  '', '', '')
+  call <sid>hi('cssInclude',           s:mono_1, '', '', '')
+  call <sid>hi('cssIncludeKeyword',    s:hue_3,  '', '', '')
+  call <sid>hi('cssMediaType',         s:hue_6,  '', '', '')
+  call <sid>hi('cssProp',              s:hue_1,  '', '', '')
+  call <sid>hi('cssPseudoClassId',     s:hue_6,  '', '', '')
+  call <sid>hi('cssSelectorOp',        s:hue_3,  '', '', '')
+  call <sid>hi('cssSelectorOp2',       s:hue_3,  '', '', '')
+  call <sid>hi('cssStringQ',           s:hue_4,  '', '', '')
+  call <sid>hi('cssStringQQ',          s:hue_4,  '', '', '')
+  call <sid>hi('cssTagName',           s:hue_5,  '', '', '')
+  call <sid>hi('cssAttr',              s:hue_6,  '', '', '')
+
+  call <sid>hi('sassAmpersand',      s:hue_5,   '', '', '')
+  call <sid>hi('sassClass',          s:hue_6_2, '', '', '')
+  call <sid>hi('sassControl',        s:hue_3,   '', '', '')
+  call <sid>hi('sassExtend',         s:hue_3,   '', '', '')
+  call <sid>hi('sassFor',            s:mono_1,  '', '', '')
+  call <sid>hi('sassProperty',       s:hue_1,   '', '', '')
+  call <sid>hi('sassFunction',       s:hue_1,   '', '', '')
+  call <sid>hi('sassId',             s:hue_2,   '', '', '')
+  call <sid>hi('sassInclude',        s:hue_3,   '', '', '')
+  call <sid>hi('sassMedia',          s:hue_3,   '', '', '')
+  call <sid>hi('sassMediaOperators', s:mono_1,  '', '', '')
+  call <sid>hi('sassMixin',          s:hue_3,   '', '', '')
+  call <sid>hi('sassMixinName',      s:hue_2,   '', '', '')
+  call <sid>hi('sassMixing',         s:hue_3,   '', '', '')
+
+  call <sid>hi('scssSelectorName',   s:hue_6_2, '', '', '')
+  " }}}
+
+  " Elixir highlighting------------------------------------------------------{{{
+  hi link elixirModuleDefine Define
+  call <sid>hi('elixirAlias',             s:hue_6_2, '', '', '')
+  call <sid>hi('elixirAtom',              s:hue_1,   '', '', '')
+  call <sid>hi('elixirBlockDefinition',   s:hue_3,   '', '', '')
+  call <sid>hi('elixirModuleDeclaration', s:hue_6,   '', '', '')
+  call <sid>hi('elixirInclude',           s:hue_5,   '', '', '')
+  call <sid>hi('elixirOperator',          s:hue_6,   '', '', '')
+  " }}}
+
+  " Git and git related plugins highlighting --------------------------------{{{
+  call <sid>hi('gitcommitComment',       s:mono_3,  '', '', '')
+  call <sid>hi('gitcommitUnmerged',      s:hue_4,   '', '', '')
+  call <sid>hi('gitcommitOnBranch',      '',        '', '', '')
+  call <sid>hi('gitcommitBranch',        s:hue_3,   '', '', '')
+  call <sid>hi('gitcommitDiscardedType', s:hue_5,   '', '', '')
+  call <sid>hi('gitcommitSelectedType',  s:hue_4,   '', '', '')
+  call <sid>hi('gitcommitHeader',        '',        '', '', '')
+  call <sid>hi('gitcommitUntrackedFile', s:hue_1,   '', '', '')
+  call <sid>hi('gitcommitDiscardedFile', s:hue_5,   '', '', '')
+  call <sid>hi('gitcommitSelectedFile',  s:hue_4,   '', '', '')
+  call <sid>hi('gitcommitUnmergedFile',  s:hue_6_2, '', '', '')
+  call <sid>hi('gitcommitFile',          '',        '', '', '')
+  hi link gitcommitNoBranch       gitcommitBranch
+  hi link gitcommitUntracked      gitcommitComment
+  hi link gitcommitDiscarded      gitcommitComment
+  hi link gitcommitSelected       gitcommitComment
+  hi link gitcommitDiscardedArrow gitcommitDiscardedFile
+  hi link gitcommitSelectedArrow  gitcommitSelectedFile
+  hi link gitcommitUnmergedArrow  gitcommitUnmergedFile
+
+  call <sid>hi('SignifySignAdd',    s:hue_4,   '', '', '')
+  call <sid>hi('SignifySignChange', s:hue_6_2, '', '', '')
+  call <sid>hi('SignifySignDelete', s:hue_5,   '', '', '')
+  hi link GitGutterAdd    SignifySignAdd
+  hi link GitGutterChange SignifySignChange
+  hi link GitGutterDelete SignifySignDelete
+  call <sid>hi('diffAdded',         s:hue_4,   '', '', '')
+  call <sid>hi('diffRemoved',       s:hue_5,   '', '', '')
+  " }}}
+
+  " Go highlighting ---------------------------------------------------------{{{
+  call <sid>hi('goDeclaration',         s:hue_3, '', '', '')
+  call <sid>hi('goField',               s:hue_5, '', '', '')
+  call <sid>hi('goMethod',              s:hue_1, '', '', '')
+  call <sid>hi('goType',                s:hue_3, '', '', '')
+  call <sid>hi('goUnsignedInts',        s:hue_1, '', '', '')
+  " }}}
+
+  " Haskell highlighting ----------------------------------------------------{{{
+  call <sid>hi('haskellDeclKeyword',    s:hue_2, '', '', '')
+  call <sid>hi('haskellType',           s:hue_4, '', '', '')
+  call <sid>hi('haskellWhere',          s:hue_5, '', '', '')
+  call <sid>hi('haskellImportKeywords', s:hue_2, '', '', '')
+  call <sid>hi('haskellOperators',      s:hue_5, '', '', '')
+  call <sid>hi('haskellDelimiter',      s:hue_2, '', '', '')
+  call <sid>hi('haskellIdentifier',     s:hue_6, '', '', '')
+  call <sid>hi('haskellKeyword',        s:hue_5, '', '', '')
+  call <sid>hi('haskellNumber',         s:hue_1, '', '', '')
+  call <sid>hi('haskellString',         s:hue_1, '', '', '')
+  "}}}
+
+  " HTML highlighting -------------------------------------------------------{{{
+  call <sid>hi('htmlArg',            s:hue_6,  '', '', '')
+  call <sid>hi('htmlTagName',        s:hue_5,  '', '', '')
+  call <sid>hi('htmlTagN',           s:hue_5,  '', '', '')
+  call <sid>hi('htmlSpecialTagName', s:hue_5,  '', '', '')
+  call <sid>hi('htmlTag',            s:mono_2, '', '', '')
+  call <sid>hi('htmlEndTag',         s:mono_2, '', '', '')
+
+  call <sid>hi('MatchTag', s:hue_5, s:syntax_cursor, 'underline,bold', '')
+  " }}}
+
+  " JavaScript highlighting -------------------------------------------------{{{
+  call <sid>hi('coffeeString',           s:hue_4,   '', '', '')
+
+  call <sid>hi('javaScriptBraces',       s:mono_2,  '', '', '')
+  call <sid>hi('javaScriptFunction',     s:hue_3,   '', '', '')
+  call <sid>hi('javaScriptIdentifier',   s:hue_3,   '', '', '')
+  call <sid>hi('javaScriptNull',         s:hue_6,   '', '', '')
+  call <sid>hi('javaScriptNumber',       s:hue_6,   '', '', '')
+  call <sid>hi('javaScriptRequire',      s:hue_1,   '', '', '')
+  call <sid>hi('javaScriptReserved',     s:hue_3,   '', '', '')
+  " https://github.com/pangloss/vim-javascript
+  call <sid>hi('jsArrowFunction',        s:hue_3,   '', '', '')
+  call <sid>hi('jsBraces',               s:mono_2,  '', '', '')
+  call <sid>hi('jsClassBraces',          s:mono_2,  '', '', '')
+  call <sid>hi('jsClassKeywords',        s:hue_3,   '', '', '')
+  call <sid>hi('jsDocParam',             s:hue_2,   '', '', '')
+  call <sid>hi('jsDocTags',              s:hue_3,   '', '', '')
+  call <sid>hi('jsFuncBraces',           s:mono_2,  '', '', '')
+  call <sid>hi('jsFuncCall',             s:hue_2,   '', '', '')
+  call <sid>hi('jsFuncParens',           s:mono_2,  '', '', '')
+  call <sid>hi('jsFunction',             s:hue_3,   '', '', '')
+  call <sid>hi('jsGlobalObjects',        s:hue_6_2, '', '', '')
+  call <sid>hi('jsModuleWords',          s:hue_3,   '', '', '')
+  call <sid>hi('jsModules',              s:hue_3,   '', '', '')
+  call <sid>hi('jsNoise',                s:mono_2,  '', '', '')
+  call <sid>hi('jsNull',                 s:hue_6,   '', '', '')
+  call <sid>hi('jsOperator',             s:hue_3,   '', '', '')
+  call <sid>hi('jsParens',               s:mono_2,  '', '', '')
+  call <sid>hi('jsStorageClass',         s:hue_3,   '', '', '')
+  call <sid>hi('jsTemplateBraces',       s:hue_5_2, '', '', '')
+  call <sid>hi('jsTemplateVar',          s:hue_4,   '', '', '')
+  call <sid>hi('jsThis',                 s:hue_5,   '', '', '')
+  call <sid>hi('jsUndefined',            s:hue_6,   '', '', '')
+  call <sid>hi('jsObjectValue',          s:hue_2,   '', '', '')
+  call <sid>hi('jsObjectKey',            s:hue_1,   '', '', '')
+  call <sid>hi('jsReturn',               s:hue_3,   '', '', '')
+  " https://github.com/othree/yajs.vim
+  call <sid>hi('javascriptArrowFunc',    s:hue_3,   '', '', '')
+  call <sid>hi('javascriptClassExtends', s:hue_3,   '', '', '')
+  call <sid>hi('javascriptClassKeyword', s:hue_3,   '', '', '')
+  call <sid>hi('javascriptDocNotation',  s:hue_3,   '', '', '')
+  call <sid>hi('javascriptDocParamName', s:hue_2,   '', '', '')
+  call <sid>hi('javascriptDocTags',      s:hue_3,   '', '', '')
+  call <sid>hi('javascriptEndColons',    s:mono_3,  '', '', '')
+  call <sid>hi('javascriptExport',       s:hue_3,   '', '', '')
+  call <sid>hi('javascriptFuncArg',      s:mono_1,  '', '', '')
+  call <sid>hi('javascriptFuncKeyword',  s:hue_3,   '', '', '')
+  call <sid>hi('javascriptIdentifier',   s:hue_5,   '', '', '')
+  call <sid>hi('javascriptImport',       s:hue_3,   '', '', '')
+  call <sid>hi('javascriptObjectLabel',  s:mono_1,  '', '', '')
+  call <sid>hi('javascriptOpSymbol',     s:hue_1,   '', '', '')
+  call <sid>hi('javascriptOpSymbols',    s:hue_1,   '', '', '')
+  call <sid>hi('javascriptPropertyName', s:hue_4,   '', '', '')
+  call <sid>hi('javascriptTemplateSB',   s:hue_5_2, '', '', '')
+  call <sid>hi('javascriptVariable',     s:hue_3,   '', '', '')
+  " }}}
+
+  " JSON highlighting -------------------------------------------------------{{{
+  call <sid>hi('jsonCommentError',         s:mono_1,  '', ''        , '')
+  call <sid>hi('jsonKeyword',              s:hue_5,   '', ''        , '')
+  call <sid>hi('jsonQuote',                s:mono_3,  '', ''        , '')
+  call <sid>hi('jsonTrailingCommaError',   s:hue_5,   '', 'reverse' , '')
+  call <sid>hi('jsonMissingCommaError',    s:hue_5,   '', 'reverse' , '')
+  call <sid>hi('jsonNoQuotesError',        s:hue_5,   '', 'reverse' , '')
+  call <sid>hi('jsonNumError',             s:hue_5,   '', 'reverse' , '')
+  call <sid>hi('jsonString',               s:hue_4,   '', ''        , '')
+  call <sid>hi('jsonBoolean',              s:hue_3,   '', ''        , '')
+  call <sid>hi('jsonNumber',               s:hue_6,   '', ''        , '')
+  call <sid>hi('jsonStringSQError',        s:hue_5,   '', 'reverse' , '')
+  call <sid>hi('jsonSemicolonError',       s:hue_5,   '', 'reverse' , '')
+  " }}}
+
+  " Markdown highlighting ---------------------------------------------------{{{
+  call <sid>hi('markdownUrl',              s:mono_3,  '', '', '')
+  call <sid>hi('markdownBold',             s:hue_6,   '', 'bold', '')
+  call <sid>hi('markdownItalic',           s:hue_6,   '', 'bold', '')
+  call <sid>hi('markdownCode',             s:hue_4,   '', '', '')
+  call <sid>hi('markdownCodeBlock',        s:hue_5,   '', '', '')
+  call <sid>hi('markdownCodeDelimiter',    s:hue_4,   '', '', '')
+  call <sid>hi('markdownHeadingDelimiter', s:hue_5_2, '', '', '')
+  call <sid>hi('markdownH1',               s:hue_5,   '', '', '')
+  call <sid>hi('markdownH2',               s:hue_5,   '', '', '')
+  call <sid>hi('markdownH3',               s:hue_5,   '', '', '')
+  call <sid>hi('markdownH3',               s:hue_5,   '', '', '')
+  call <sid>hi('markdownH4',               s:hue_5,   '', '', '')
+  call <sid>hi('markdownH5',               s:hue_5,   '', '', '')
+  call <sid>hi('markdownH6',               s:hue_5,   '', '', '')
+  call <sid>hi('markdownListMarker',       s:hue_5,   '', '', '')
+  " }}}
+
+  " PHP highlighting --------------------------------------------------------{{{
+  call <sid>hi('phpClass',        s:hue_6_2, '', '', '')
+  call <sid>hi('phpFunction',     s:hue_2,   '', '', '')
+  call <sid>hi('phpFunctions',    s:hue_2,   '', '', '')
+  call <sid>hi('phpInclude',      s:hue_3,   '', '', '')
+  call <sid>hi('phpKeyword',      s:hue_3,   '', '', '')
+  call <sid>hi('phpParent',       s:mono_3,  '', '', '')
+  call <sid>hi('phpType',         s:hue_3,   '', '', '')
+  call <sid>hi('phpSuperGlobals', s:hue_5,   '', '', '')
+  " }}}
+
+  " Pug (Formerly Jade) highlighting ----------------------------------------{{{
+  call <sid>hi('pugAttributesDelimiter',   s:hue_6,    '', '', '')
+  call <sid>hi('pugClass',                 s:hue_6,    '', '', '')
+  call <sid>hi('pugDocType',               s:mono_3,   '', s:italic, '')
+  call <sid>hi('pugTag',                   s:hue_5,    '', '', '')
+  " }}}
+
+  " PureScript highlighting -------------------------------------------------{{{
+  call <sid>hi('purescriptKeyword',          s:hue_3,     '', '', '')
+  call <sid>hi('purescriptModuleName',       s:syntax_fg, '', '', '')
+  call <sid>hi('purescriptIdentifier',       s:syntax_fg, '', '', '')
+  call <sid>hi('purescriptType',             s:hue_6_2,   '', '', '')
+  call <sid>hi('purescriptTypeVar',          s:hue_5,     '', '', '')
+  call <sid>hi('purescriptConstructor',      s:hue_5,     '', '', '')
+  call <sid>hi('purescriptOperator',         s:syntax_fg, '', '', '')
+  " }}}
+
+  " Python highlighting -----------------------------------------------------{{{
+  call <sid>hi('pythonImport',               s:hue_3,     '', '', '')
+  call <sid>hi('pythonBuiltin',              s:hue_1,     '', '', '')
+  call <sid>hi('pythonStatement',            s:hue_3,     '', '', '')
+  call <sid>hi('pythonParam',                s:hue_6,     '', '', '')
+  call <sid>hi('pythonEscape',               s:hue_5,     '', '', '')
+  call <sid>hi('pythonSelf',                 s:mono_2,    '', s:italic, '')
+  call <sid>hi('pythonClass',                s:hue_2,     '', '', '')
+  call <sid>hi('pythonOperator',             s:hue_3,     '', '', '')
+  call <sid>hi('pythonEscape',               s:hue_5,     '', '', '')
+  call <sid>hi('pythonFunction',             s:hue_2,     '', '', '')
+  call <sid>hi('pythonKeyword',              s:hue_2,     '', '', '')
+  call <sid>hi('pythonModule',               s:hue_3,     '', '', '')
+  call <sid>hi('pythonStringDelimiter',      s:hue_4,     '', '', '')
+  call <sid>hi('pythonSymbol',               s:hue_1,     '', '', '')
+  " }}}
+
+  " Ruby highlighting -------------------------------------------------------{{{
+  call <sid>hi('rubyBlock',                     s:hue_3,   '', '', '')
+  call <sid>hi('rubyBlockParameter',            s:hue_5,   '', '', '')
+  call <sid>hi('rubyBlockParameterList',        s:hue_5,   '', '', '')
+  call <sid>hi('rubyCapitalizedMethod',         s:hue_3,   '', '', '')
+  call <sid>hi('rubyClass',                     s:hue_3,   '', '', '')
+  call <sid>hi('rubyConstant',                  s:hue_6_2, '', '', '')
+  call <sid>hi('rubyControl',                   s:hue_3,   '', '', '')
+  call <sid>hi('rubyDefine',                    s:hue_3,   '', '', '')
+  call <sid>hi('rubyEscape',                    s:hue_5,   '', '', '')
+  call <sid>hi('rubyFunction',                  s:hue_2,   '', '', '')
+  call <sid>hi('rubyGlobalVariable',            s:hue_5,   '', '', '')
+  call <sid>hi('rubyInclude',                   s:hue_2,   '', '', '')
+  call <sid>hi('rubyIncluderubyGlobalVariable', s:hue_5,   '', '', '')
+  call <sid>hi('rubyInstanceVariable',          s:hue_5,   '', '', '')
+  call <sid>hi('rubyInterpolation',             s:hue_1,   '', '', '')
+  call <sid>hi('rubyInterpolationDelimiter',    s:hue_5,   '', '', '')
+  call <sid>hi('rubyKeyword',                   s:hue_2,   '', '', '')
+  call <sid>hi('rubyModule',                    s:hue_3,   '', '', '')
+  call <sid>hi('rubyPseudoVariable',            s:hue_5,   '', '', '')
+  call <sid>hi('rubyRegexp',                    s:hue_1,   '', '', '')
+  call <sid>hi('rubyRegexpDelimiter',           s:hue_1,   '', '', '')
+  call <sid>hi('rubyStringDelimiter',           s:hue_4,   '', '', '')
+  call <sid>hi('rubySymbol',                    s:hue_1,   '', '', '')
+  " }}}
+
+  " Spelling highlighting ---------------------------------------------------{{{
+  call <sid>hi('SpellBad',     '', s:syntax_bg, 'undercurl', '')
+  call <sid>hi('SpellLocal',   '', s:syntax_bg, 'undercurl', '')
+  call <sid>hi('SpellCap',     '', s:syntax_bg, 'undercurl', '')
+  call <sid>hi('SpellRare',    '', s:syntax_bg, 'undercurl', '')
+  " }}}
+
+  " Vim highlighting --------------------------------------------------------{{{
+  call <sid>hi('vimCommand',      s:hue_3,  '', '', '')
+  call <sid>hi('vimCommentTitle', s:mono_3, '', 'bold', '')
+  call <sid>hi('vimFunction',     s:hue_1,  '', '', '')
+  call <sid>hi('vimFuncName',     s:hue_3,  '', '', '')
+  call <sid>hi('vimHighlight',    s:hue_2,  '', '', '')
+  call <sid>hi('vimLineComment',  s:mono_3, '', s:italic, '')
+  call <sid>hi('vimParenSep',     s:mono_2, '', '', '')
+  call <sid>hi('vimSep',          s:mono_2, '', '', '')
+  call <sid>hi('vimUserFunc',     s:hue_1,  '', '', '')
+  call <sid>hi('vimVar',          s:hue_5,  '', '', '')
+  " }}}
+
+  " XML highlighting --------------------------------------------------------{{{
+  call <sid>hi('xmlAttrib',  s:hue_6_2, '', '', '')
+  call <sid>hi('xmlEndTag',  s:hue_5,   '', '', '')
+  call <sid>hi('xmlTag',     s:hue_5,   '', '', '')
+  call <sid>hi('xmlTagName', s:hue_5,   '', '', '')
+  " }}}
+
+  " ZSH highlighting --------------------------------------------------------{{{
+  call <sid>hi('zshCommands',     s:syntax_fg, '', '', '')
+  call <sid>hi('zshDeref',        s:hue_5,     '', '', '')
+  call <sid>hi('zshShortDeref',   s:hue_5,     '', '', '')
+  call <sid>hi('zshFunction',     s:hue_1,     '', '', '')
+  call <sid>hi('zshKeyword',      s:hue_3,     '', '', '')
+  call <sid>hi('zshSubst',        s:hue_5,     '', '', '')
+  call <sid>hi('zshSubstDelim',   s:mono_3,    '', '', '')
+  call <sid>hi('zshTypes',        s:hue_3,     '', '', '')
+  call <sid>hi('zshVariableDef',  s:hue_6,     '', '', '')
+  " }}}
+
+  " Rust highlighting -------------------------------------------------------{{{
+  call <sid>hi('rustExternCrate',          s:hue_5,    '', 'bold', '')
+  call <sid>hi('rustIdentifier',           s:hue_2,    '', '', '')
+  call <sid>hi('rustDeriveTrait',          s:hue_4,    '', '', '')
+  call <sid>hi('SpecialComment',           s:mono_3,    '', '', '')
+  call <sid>hi('rustCommentLine',          s:mono_3,    '', '', '')
+  call <sid>hi('rustCommentLineDoc',       s:mono_3,    '', '', '')
+  call <sid>hi('rustCommentLineDocError',  s:mono_3,    '', '', '')
+  call <sid>hi('rustCommentBlock',         s:mono_3,    '', '', '')
+  call <sid>hi('rustCommentBlockDoc',      s:mono_3,    '', '', '')
+  call <sid>hi('rustCommentBlockDocError', s:mono_3,    '', '', '')
+  " }}}
+
+  " man highlighting --------------------------------------------------------{{{
+  hi link manTitle String
+  call <sid>hi('manFooter', s:mono_3, '', '', '')
+  " }}}
+
+  " ALE (Asynchronous Lint Engine) highlighting -----------------------------{{{
+  call <sid>hi('ALEWarningSign', s:hue_6_2, '', '', '')
+  call <sid>hi('ALEErrorSign', s:hue_5,   '', '', '')
 
   " Neovim Terminal Colors --------------------------------------------------{{{
   let g:terminal_color_0  = "#353a44"
@@ -1130,7 +852,6 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
   let g:terminal_color_14 = "#65c2cd"
   let g:terminal_color_7  = "#e3e5e9"
   let g:terminal_color_15 = "#e3e5e9"
-  " }}}
 
   " Delete functions =========================================================={{{
   " delf <SID>X
@@ -1142,7 +863,7 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
   " delf <SID>grey_color
   " delf <SID>grey_level
   " delf <SID>grey_number
-  "}}}
+  " }}}
 
 endif
 "}}}
@@ -1151,7 +872,7 @@ endif
 function! one#highlight(group, fg, bg, attr)
   call <sid>X(a:group, a:fg, a:bg, a:attr)
 endfunction
-" }}}
+"}}}
 
 if exists('s:dark') && s:dark
   set background=dark
