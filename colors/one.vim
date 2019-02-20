@@ -21,85 +21,66 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
   let s:dark = 0
   if &background ==# 'dark'
     let s:dark = 1
-    let s:mono_1 = 'abb2bf'
-    let s:mono_2 = '828997'
-    let s:mono_3 = '5c6370'
-    let s:mono_4 = '4b5263'
+    let s:mono_1 = ['#abb2bf', '145']
+    let s:mono_2 = ['#828997', '102']
+    let s:mono_3 = ['#5c6370', '59']
+    let s:mono_4 = ['#4b5263', '59']
 
-    let s:hue_1  = '56b6c2' " cyan
-    let s:hue_2  = '61afef' " blue
-    let s:hue_3  = 'c678dd' " purple
-    let s:hue_4  = '98c379' " green
+    let s:hue_1  = ['#56b6c2', '73'] " cyan
+    let s:hue_2  = ['#61afef', '75'] " blue
+    let s:hue_3  = ['#c678dd', '176'] " purple
+    let s:hue_4  = ['#98c379', '114'] " green
 
-    let s:hue_5   = 'e06c75' " red 1
-    let s:hue_5_2 = 'be5046' " red 2
+    let s:hue_5   = ['#e06c75', '168'] " red 1
+    let s:hue_5_2 = ['#be5046', '130'] " red 2
 
-    let s:hue_6   = 'd19a66' " orange 1
-    let s:hue_6_2 = 'e5c07b' " orange 2
+    let s:hue_6   = ['#d19a66', '173'] " orange 1
+    let s:hue_6_2 = ['#e5c07b', '180'] " orange 2
 
-    let s:syntax_bg     = '282c34'
-    let s:syntax_gutter = '636d83'
-    let s:syntax_cursor = '2c323c'
+    let s:syntax_bg     = ['#282c34', '16']
+    let s:syntax_gutter = ['#636d83', '60']
+    let s:syntax_cursor = ['#2c323c', '16']
 
-    let s:syntax_accent = '528bff'
+    let s:syntax_accent = ['#528bff', '69']
 
-    let s:vertsplit    = '181a1f'
-    let s:special_grey = '3b4048'
-    let s:visual_grey  = '3e4452'
-    let s:pmenu        = '333841'
+    let s:vertsplit    = ['#181a1f', '233']
+    let s:special_grey = ['#3b4048', '16']
+    let s:visual_grey  = ['#3e4452', '17']
+    let s:pmenu        = ['#333841', '16']
   else
-    let s:mono_1 = '494b53'
-    let s:mono_2 = '696c77'
-    let s:mono_3 = 'a0a1a7'
-    let s:mono_4 = 'c2c2c3'
+    let s:mono_1 = ['#494b53', '23']
+    let s:mono_2 = ['#696c77', '60']
+    let s:mono_3 = ['#a0a1a7', '145']
+    let s:mono_4 = ['#c2c2c3', '250']
 
-    let s:hue_1  = '0184bc' " cyan
-    let s:hue_2  = '4078f2' " blue
-    let s:hue_3  = 'a626a4' " purple
-    let s:hue_4  = '50a14f' " green
+    let s:hue_1  = ['#0184bc', '31'] " cyan
+    let s:hue_2  = ['#4078f2', '33'] " blue
+    let s:hue_3  = ['#a626a4', '127'] " purple
+    let s:hue_4  = ['#50a14f', '71'] " green
 
-    let s:hue_5   = 'e45649' " red 1
-    let s:hue_5_2 = 'ca1243' " red 2
+    let s:hue_5   = ['#e45649', '166'] " red 1
+    let s:hue_5_2 = ['#ca1243', '160'] " red 2
 
-    let s:hue_6   = '986801' " orange 1
-    let s:hue_6_2 = 'c18401' " orange 2
+    let s:hue_6   = ['#986801', '94'] " orange 1
+    let s:hue_6_2 = ['#c18401', '136'] " orange 2
 
-    let s:syntax_bg     = 'fafafa'
-    let s:syntax_gutter = '9e9e9e'
-    let s:syntax_cursor = 'f0f0f0'
+    let s:syntax_bg     = ['#fafafa', '255']
+    let s:syntax_gutter = ['#9e9e9e', '247']
+    let s:syntax_cursor = ['#f0f0f0', '254']
 
-    let s:syntax_accent = '526fff'
-    let s:syntax_accent_2 = '0083be'
+    let s:syntax_accent = ['#526fff', '63']
+    let s:syntax_accent_2 = ['#0083be', '31']
 
-    let s:vertsplit    = 'e7e9e1'
-    let s:special_grey = 'd3d3d3'
-    let s:visual_grey  = 'd0d0d0'
-    let s:pmenu        = 'dfdfdf'
+    let s:vertsplit    = ['#e7e9e1', '188']
+    let s:special_grey = ['#d3d3d3', '251']
+    let s:visual_grey  = ['#d0d0d0', '251']
+    let s:pmenu        = ['#dfdfdf', '253']
   endif
 
   let s:syntax_fg = s:mono_1
   let s:syntax_fold_bg = s:mono_3
 
-  "}}}
-
-  " Neovim Terminal Colors --------------------------------------------------{{{
-  let g:terminal_color_0  = "#353a44"
-  let g:terminal_color_8  = "#353a44"
-  let g:terminal_color_1  = "#e88388"
-  let g:terminal_color_9  = "#e88388"
-  let g:terminal_color_2  = "#a7cc8c"
-  let g:terminal_color_10 = "#a7cc8c"
-  let g:terminal_color_3  = "#ebca8d"
-  let g:terminal_color_11 = "#ebca8d"
-  let g:terminal_color_4  = "#72bef2"
-  let g:terminal_color_12 = "#72bef2"
-  let g:terminal_color_5  = "#d291e4"
-  let g:terminal_color_13 = "#d291e4"
-  let g:terminal_color_6  = "#65c2cd"
-  let g:terminal_color_14 = "#65c2cd"
-  let g:terminal_color_7  = "#e3e5e9"
-  let g:terminal_color_15 = "#e3e5e9"
-  "}}}
+  " }}}
 
   if &background ==# 'dark'
     " Dark Italic {{{
@@ -888,6 +869,26 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
       hi vimLineComment guifg=#a0a1a7 ctermfg=145 gui=none cterm=none
     endif
   endif
+
+  " Neovim Terminal Colors --------------------------------------------------{{{
+  let g:terminal_color_0  = "#353a44"
+  let g:terminal_color_8  = "#353a44"
+  let g:terminal_color_1  = "#e88388"
+  let g:terminal_color_9  = "#e88388"
+  let g:terminal_color_2  = "#a7cc8c"
+  let g:terminal_color_10 = "#a7cc8c"
+  let g:terminal_color_3  = "#ebca8d"
+  let g:terminal_color_11 = "#ebca8d"
+  let g:terminal_color_4  = "#72bef2"
+  let g:terminal_color_12 = "#72bef2"
+  let g:terminal_color_5  = "#d291e4"
+  let g:terminal_color_13 = "#d291e4"
+  let g:terminal_color_6  = "#65c2cd"
+  let g:terminal_color_14 = "#65c2cd"
+  let g:terminal_color_7  = "#e3e5e9"
+  let g:terminal_color_15 = "#e3e5e9"
+  " }}}
+
 endif
 "}}}
 
