@@ -487,6 +487,13 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
     hi ALEWarningSign guifg=#e5c07b ctermfg=180
     hi ALEErrorSign guifg=#e06c75 ctermfg=168
     "}}}
+    if g:one_allow_italics == 0
+      hi Italic gui=none cterm=none
+      hi Comment guifg=#5c6370 ctermfg=59 gui=none cterm=none
+      hi pugDocType guifg=#5c6370 ctermfg=59 gui=none cterm=none
+      hi pythonSelf guifg=#828997 ctermfg=102 gui=none cterm=none
+      hi vimLineComment guifg=#5c6370 ctermfg=59 gui=none cterm=none
+    endif
   else
     " Light Italic {{{
     hi Normal guifg=#494b53 ctermfg=23 guibg=#fafafa ctermbg=255
@@ -873,6 +880,13 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
     hi ALEWarningSign guifg=#c18401 ctermfg=136
     hi ALEErrorSign guifg=#e45649 ctermfg=166
     "}}}
+    if g:one_allow_italics == 0
+      hi Italic gui=none cterm=none
+      hi Comment guifg=#a0a1a7 ctermfg=145 gui=none cterm=none
+      hi pugDocType guifg=#a0a1a7 ctermfg=145 gui=none cterm=none
+      hi pythonSelf guifg=#696c77 ctermfg=60 gui=none cterm=none
+      hi vimLineComment guifg=#a0a1a7 ctermfg=145 gui=none cterm=none
+    endif
   endif
 endif
 "}}}
