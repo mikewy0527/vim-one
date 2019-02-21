@@ -355,12 +355,12 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
 
   " Pre-define some hi groups -----------------------------------------------{{{
   call <sid>X('OneMono1', s:mono_1, '', '', '')
-  call <sid>X('OneMono2', s:mono_3, '', '', '')
+  call <sid>X('OneMono2', s:mono_2, '', '', '')
   call <sid>X('OneMono3', s:mono_3, '', '', '')
   call <sid>X('OneMono4', s:mono_4, '', '', '')
 
   call <sid>X('OneHue1', s:hue_1, '', '', '')
-  call <sid>X('OneHue2', s:hue_3, '', '', '')
+  call <sid>X('OneHue2', s:hue_2, '', '', '')
   call <sid>X('OneHue3', s:hue_3, '', '', '')
   call <sid>X('OneHue4', s:hue_4, '', '', '')
   call <sid>X('OneHue5', s:hue_5, '', '', '')
