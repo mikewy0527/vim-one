@@ -16,6 +16,7 @@ if exists("*<SID>X")
   delf <SID>grey_color
   delf <SID>grey_level
   delf <SID>grey_number
+  delf <SID>user_color_palette
 endif
 
 hi clear
@@ -265,7 +266,7 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
 
   " Highlight function
   " the original one is borrowed from mhartington/oceanic-next
-  function! <SID>X(group, fg, bg, attr, ...)
+  fun <SID>X(group, fg, bg, attr, ...)
     let a:attrsp = get(a:, 1, "")
     " fg, bg, attr, attrsp
     if !empty(a:fg)
@@ -283,6 +284,24 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
     if !empty(a:attrsp)
       exec "hi " . a:group . " guisp=" . a:attrsp[0]
     endif
+  endfun
+
+  " replace predefined colors with user defined ones
+  fun <SID>user_color_palette(style)
+    let l:color= ['', '']
+    for i in ['mono_1', 'mono_2', 'mono_3', 'mono_4',
+      \ 'hue_1', 'hue_2', 'hue_3', 'hue_4',
+      \ 'hue_5', 'hue_5_2', 'hue_6', 'hue_6_2',
+      \ 'syntax_bg', 'syntax_gutter', 'syntax_cursor', 'syntax_accent', 'syntax_accent_2',
+      \ 'vertsplit', 'special_grey', 'visual_grey', 'pmenu' ]
+      if exists('g:one_' . a:style . '_' . i)
+        exe 'let l:color[0] = g:one_' . a:style . '_' . i
+        let l:color[0] = substitute(l:color[0], '#', '', '')
+        let l:color[1] = <SID>rgb(l:color[0])
+        let l:color[0] = '#' . l:color[0]
+        exe 'let s:' . i . '=l:color'
+      endif
+    endfor
   endfun
 
   " }}}
@@ -318,6 +337,8 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
     let s:special_grey = ['#3b4048', '16']
     let s:visual_grey  = ['#3e4452', '17']
     let s:pmenu        = ['#333841', '16']
+
+    call <SID>user_color_palette('dark')
   else
     let s:mono_1 = ['#494b53', '23']
     let s:mono_2 = ['#696c77', '60']
@@ -346,6 +367,8 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
     let s:special_grey = ['#d3d3d3', '251']
     let s:visual_grey  = ['#d0d0d0', '251']
     let s:pmenu        = ['#dfdfdf', '253']
+
+    call <SID>user_color_palette('light')
   endif
 
   let s:syntax_fg = s:mono_1
@@ -887,6 +910,7 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
   " delf <SID>grey_color
   " delf <SID>grey_level
   " delf <SID>grey_number
+  " delf <SID>user_color_palette
   " }}}
 
 endif
