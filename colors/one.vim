@@ -35,6 +35,10 @@ if g:one_allow_italics == 1
   let s:italic = 'italic'
 endif
 
+if !exists('g:one_termcolors')
+  let g:one_termcolors = 1
+endif
+
 if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
   " functions
   " returns an approximate grey index for the given grey level
@@ -884,7 +888,7 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
   hi! link ALEErrorSign OneHue5
 
   " Neovim Terminal Colors --------------------------------------------------{{{
-  if has('nvim')
+  if has('nvim') && g:one_termcolors != 0
     let g:terminal_color_0  = "#353a44"
     let g:terminal_color_8  = "#353a44"
     let g:terminal_color_1  = "#e88388"
