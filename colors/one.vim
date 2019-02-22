@@ -293,7 +293,8 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
       \ 'hue_1', 'hue_2', 'hue_3', 'hue_4',
       \ 'hue_5', 'hue_5_2', 'hue_6', 'hue_6_2',
       \ 'syntax_bg', 'syntax_gutter', 'syntax_cursor', 'syntax_accent', 'syntax_accent_2',
-      \ 'vertsplit', 'special_grey', 'visual_grey', 'pmenu' ]
+      \ 'vertsplit', 'special_grey', 'visual_grey', 'pmenu',
+      \ 'syntax_fg', 'syntax_fold_bg' ]
       if exists('g:one_' . a:style . '_' . i)
         exe 'let l:color[0] = g:one_' . a:style . '_' . i
         let l:color[0] = substitute(l:color[0], '#', '', '')
@@ -338,6 +339,9 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
     let s:visual_grey  = ['#3e4452', '17']
     let s:pmenu        = ['#333841', '16']
 
+    let s:syntax_fg = s:mono_1
+    let s:syntax_fold_bg = s:mono_3
+
     call <SID>user_color_palette('dark')
   else
     let s:mono_1 = ['#494b53', '23']
@@ -368,11 +372,11 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
     let s:visual_grey  = ['#d0d0d0', '251']
     let s:pmenu        = ['#dfdfdf', '253']
 
+    let s:syntax_fg = s:mono_1
+    let s:syntax_fold_bg = s:mono_3
+
     call <SID>user_color_palette('light')
   endif
-
-  let s:syntax_fg = s:mono_1
-  let s:syntax_fold_bg = s:mono_3
 
   " }}}
 
