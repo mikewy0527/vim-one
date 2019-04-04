@@ -5,6 +5,51 @@ excellent text editor). **One** supports *true colors* and falls back
 gracefully and automatically if your environment does not support this
 feature.
 
+## Everything You Should Know about This Fork
+
+It seems rakr stopped maintaining the original repo and there's been
+no response for the pull requests since March 2018, although he still
+uses GitHub once in a while from what we know about the contribution
+graph. Hence, I decide to stop opening pr and updates in my own fork.
+
+Changes made on this fork
+- reduce theme loading time from 170 ms to 18 ms by
+  - hard coding the 256 color, see [pr_93]
+  - reusing highlight definitions with predefined groups (`hi link`)
+- color palette customization support
+
+|                              | loading time           |
+| ---------------------------- | ---------------------- |
+| original                     | 170.621 ms             |
+| hard coding the 256 color    | 33.659 ms              |
+| reusing defs with `hi link`  | 18.253 ms              |
+| custom `syntax_bg` only      | 20.232 ms              |
+
+### Color Palette Customization
+This feature is **not** designed to change **the whole color palette**
+of `vim-one`. The language specific highlights are based on the default
+`vim-one` color palette. Redefining a completely different palette may
+result in ugly highlights.
+
+#### Usage
+For example, we can change the background color by defining global variable
+
+```viml
+let g:one_light_syntax_bg='#123456'
+# or
+let g:one_dark_syntax_bg='#123456'
+```
+
+All available color palette keywords are as follows,
+- `mono_1`, `mono_2`, `mono_3`, `mono_4`
+- `hue_1`, `hue_2`, `hue_3`, `hue_4`, `hue_5`, `hue_5_2`, `hue_6`, `hue_6_2`
+- `syntax_bg`, `syntax_gutter`, `syntax_cursor`, `syntax_accent`, `syntax_accent_2`
+- `vertsplit`, `special_grey`, `visual_grey`, `pmenu`
+- `syntax_fg`, `syntax_fold_bg`
+
+Prefix these keywords with `one_dark_` for dark color scheme
+and `one_light_` for the light. Browse the source code for more detail.
+
 ## Vim Airline theme
 
 Add the following line to your `~/.vimrc` or `~/.config/nvim/init.vim`
@@ -171,3 +216,5 @@ A special thank you to the following people
 
 [issue_3]: https://github.com/rakr/vim-one/issues/3
 [issue_21]: https://github.com/rakr/vim-one/issues/21
+
+[pr_93]: https://github.com/rakr/vim-one/pull/93
