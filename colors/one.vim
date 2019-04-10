@@ -883,6 +883,11 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
   hi! link manFooter OneMono3
   " }}}
 
+  
+  " Neovim NERDTree Background fix ------------------------------------------{{{
+  call <sid>X('NERDTreeFile', s:syntax_fg, '', '')
+  " }}}
+
   " ALE (Asynchronous Lint Engine) highlighting -----------------------------{{{
   hi! link ALEWarningSign OneHue62
   hi! link ALEErrorSign OneHue5
