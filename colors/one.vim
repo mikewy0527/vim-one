@@ -385,90 +385,90 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
   " }}}
 
   " Pre-define some hi groups -----------------------------------------------{{{
-  call <sid>X('OneMono1', s:mono_1, '', '', '')
-  call <sid>X('OneMono2', s:mono_2, '', '', '')
-  call <sid>X('OneMono3', s:mono_3, '', '', '')
-  call <sid>X('OneMono4', s:mono_4, '', '', '')
+  call <sid>X('OneMono1', s:mono_1, '', '')
+  call <sid>X('OneMono2', s:mono_2, '', '')
+  call <sid>X('OneMono3', s:mono_3, '', '')
+  call <sid>X('OneMono4', s:mono_4, '', '')
 
-  call <sid>X('OneHue1', s:hue_1, '', '', '')
-  call <sid>X('OneHue2', s:hue_2, '', '', '')
-  call <sid>X('OneHue3', s:hue_3, '', '', '')
-  call <sid>X('OneHue4', s:hue_4, '', '', '')
-  call <sid>X('OneHue5', s:hue_5, '', '', '')
-  call <sid>X('OneHue52', s:hue_5_2, '', '', '')
-  call <sid>X('OneHue6', s:hue_6, '', '', '')
-  call <sid>X('OneHue62', s:hue_6_2, '', '', '')
+  call <sid>X('OneHue1', s:hue_1, '', '')
+  call <sid>X('OneHue2', s:hue_2, '', '')
+  call <sid>X('OneHue3', s:hue_3, '', '')
+  call <sid>X('OneHue4', s:hue_4, '', '')
+  call <sid>X('OneHue5', s:hue_5, '', '')
+  call <sid>X('OneHue52', s:hue_5_2, '', '')
+  call <sid>X('OneHue6', s:hue_6, '', '')
+  call <sid>X('OneHue62', s:hue_6_2, '', '')
 
   hi! link OneSyntaxFg OneMono1
   " }}}
 
   " Vim editor color --------------------------------------------------------{{{
-  call <sid>X('Normal',       s:syntax_fg,     s:syntax_bg,      '', '')
-  call <sid>X('bold',         '',              '',               'bold', '')
-  call <sid>X('ColorColumn',  '',              s:syntax_cursor,  '', '')
-  call <sid>X('Conceal',      s:mono_4,        s:syntax_bg,      '', '')
-  call <sid>X('Cursor',       '',              s:syntax_accent,  '', '')
-  call <sid>X('CursorIM',     '',              '',               '', '')
-  call <sid>X('CursorColumn', '',              s:syntax_cursor,  '', '')
-  call <sid>X('CursorLine',   '',              s:syntax_cursor,  'none', '')
+  call <sid>X('Normal',       s:syntax_fg,     s:syntax_bg,      '')
+  call <sid>X('bold',         '',              '',               'bold')
+  call <sid>X('ColorColumn',  '',              s:syntax_cursor,  '')
+  call <sid>X('Conceal',      s:mono_4,        s:syntax_bg,      '')
+  call <sid>X('Cursor',       '',              s:syntax_accent,  '')
+  call <sid>X('CursorIM',     '',              '',               '')
+  call <sid>X('CursorColumn', '',              s:syntax_cursor,  '')
+  call <sid>X('CursorLine',   '',              s:syntax_cursor,  'none')
   hi! link Directory OneHue2
-  call <sid>X('ErrorMsg',     s:hue_5,         s:syntax_bg,      'none', '')
-  call <sid>X('VertSplit',    s:vertsplit,     '',               'none', '')
-  call <sid>X('Folded',       s:syntax_bg,     s:syntax_fold_bg, 'none', '')
-  call <sid>X('FoldColumn',   s:mono_3,        s:syntax_cursor,  '', '')
+  call <sid>X('ErrorMsg',     s:hue_5,         s:syntax_bg,      'none')
+  call <sid>X('VertSplit',    s:vertsplit,     '',               'none')
+  call <sid>X('Folded',       s:syntax_bg,     s:syntax_fold_bg, 'none')
+  call <sid>X('FoldColumn',   s:mono_3,        s:syntax_cursor,  '')
   hi! link IncSearch OneHue6
   hi! link LineNr OneMono4
-  call <sid>X('CursorLineNr', s:syntax_fg,     s:syntax_cursor,  'none', '')
-  call <sid>X('MatchParen',   s:hue_5,         s:syntax_cursor,  'underline,bold', '')
-  call <sid>X('Italic',       '',              '',               s:italic, '')
+  call <sid>X('CursorLineNr', s:syntax_fg,     s:syntax_cursor,  'none')
+  call <sid>X('MatchParen',   s:hue_5,         s:syntax_cursor,  'underline,bold')
+  call <sid>X('Italic',       '',              '',               s:italic)
   hi! link ModeMsg OneSyntaxFg
   hi! link MoreMsg OneSyntaxFg
-  call <sid>X('NonText',      s:mono_3,        '',               'none', '')
-  call <sid>X('PMenu',        '',              s:pmenu,          '', '')
-  call <sid>X('PMenuSel',     '',              s:mono_4,         '', '')
-  call <sid>X('PMenuSbar',    '',              s:syntax_bg,      '', '')
-  call <sid>X('PMenuThumb',   '',              s:mono_1,         '', '')
+  call <sid>X('NonText',      s:mono_3,        '',               'none')
+  call <sid>X('PMenu',        '',              s:pmenu,          '')
+  call <sid>X('PMenuSel',     '',              s:mono_4,         '')
+  call <sid>X('PMenuSbar',    '',              s:syntax_bg,      '')
+  call <sid>X('PMenuThumb',   '',              s:mono_1,         '')
   hi! link Question OneHue2
-  call <sid>X('Search',       s:syntax_bg,     s:hue_6_2,        '', '')
-  call <sid>X('SpecialKey',   s:special_grey,  '',               'none', '')
-  call <sid>X('Whitespace',   s:special_grey,  '',               'none', '')
-  call <sid>X('StatusLine',   s:syntax_fg,     s:syntax_cursor,  'none', '')
+  call <sid>X('Search',       s:syntax_bg,     s:hue_6_2,        '')
+  call <sid>X('SpecialKey',   s:special_grey,  '',               'none')
+  call <sid>X('Whitespace',   s:special_grey,  '',               'none')
+  call <sid>X('StatusLine',   s:syntax_fg,     s:syntax_cursor,  'none')
   hi! link StatusLineNC OneMono3
-  call <sid>X('TabLine',      s:mono_1,        s:syntax_bg,      '', '')
-  call <sid>X('TabLineFill',  s:mono_3,        s:visual_grey,    'none', '')
-  call <sid>X('TabLineSel',   s:syntax_bg,     s:hue_2,          '', '')
-  call <sid>X('Title',        s:syntax_fg,     '',               'bold', '')
-  call <sid>X('Visual',       '',              s:visual_grey,    '', '')
-  call <sid>X('VisualNOS',    '',              s:visual_grey,    '', '')
+  call <sid>X('TabLine',      s:mono_1,        s:syntax_bg,      '')
+  call <sid>X('TabLineFill',  s:mono_3,        s:visual_grey,    'none')
+  call <sid>X('TabLineSel',   s:syntax_bg,     s:hue_2,          '')
+  call <sid>X('Title',        s:syntax_fg,     '',               'bold')
+  call <sid>X('Visual',       '',              s:visual_grey,    '')
+  call <sid>X('VisualNOS',    '',              s:visual_grey,    '')
   hi! link WarningMsg OneHue5
   hi! link TooLong OneHue5
-  call <sid>X('WildMenu',     s:syntax_fg,     s:mono_3,         '', '')
-  call <sid>X('SignColumn',   '',              s:syntax_bg,      '', '')
+  call <sid>X('WildMenu',     s:syntax_fg,     s:mono_3,         '')
+  call <sid>X('SignColumn',   '',              s:syntax_bg,      '')
   hi! link Special OneHue2
   " }}}
 
   " Vim Help highlighting ---------------------------------------------------{{{
   hi! link helpCommand OneHue62
   hi! link helpExample OneHue62
-  call <sid>X('helpHeader',       s:mono_1,  '', 'bold', '')
+  call <sid>X('helpHeader',       s:mono_1,  '', 'bold')
   hi! link helpSectionDelim OneMono3
   " }}}
 
   " Standard syntax highlighting --------------------------------------------{{{
-  call <sid>X('Comment',        s:mono_3,        '',          s:italic, '')
+  call <sid>X('Comment',        s:mono_3,        '',          s:italic)
   hi! link Constant OneHue4
   hi! link String OneHue4
   hi! link Character OneHue4
   hi! link Number OneHue6
   hi! link Boolean OneHue6
   hi! link Float OneHue6
-  call <sid>X('Identifier',     s:hue_5,         '',          'none', '')
+  call <sid>X('Identifier',     s:hue_5,         '',          'none')
   hi! link Function OneHue2
   hi! link Statement OneHue3
   hi! link Conditional OneHue3
   hi! link Repeat OneHue3
   hi! link Label OneHue3
-  call <sid>X('Operator',       s:syntax_accent, '',          'none', '')
+  call <sid>X('Operator',       s:syntax_accent, '',          'none')
   hi! link Keyword OneHue5
   hi! link Exception OneHue3
   hi! link PreProc OneHue62
@@ -481,27 +481,27 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
   hi! link Structure OneHue62
   hi! link Typedef OneHue62
   hi! link Special OneHue2
-  call <sid>X('SpecialChar',    '',              '',          '', '')
-  call <sid>X('Tag',            '',              '',          '', '')
-  call <sid>X('Delimiter',      '',              '',          '', '')
-  call <sid>X('SpecialComment', '',              '',          '', '')
-  call <sid>X('Debug',          '',              '',          '', '')
-  call <sid>X('Underlined',     '',              '',          'underline', '')
-  call <sid>X('Ignore',         '',              '',          '', '')
-  call <sid>X('Error',          s:hue_5,         s:syntax_bg, 'bold', '')
+  call <sid>X('SpecialChar',    '',              '',          '')
+  call <sid>X('Tag',            '',              '',          '')
+  call <sid>X('Delimiter',      '',              '',          '')
+  call <sid>X('SpecialComment', '',              '',          '')
+  call <sid>X('Debug',          '',              '',          '')
+  call <sid>X('Underlined',     '',              '',          'underline')
+  call <sid>X('Ignore',         '',              '',          '')
+  call <sid>X('Error',          s:hue_5,         s:syntax_bg, 'bold')
   hi! link Todo OneHue3
   " }}}
 
   " Diff highlighting -------------------------------------------------------{{{
-  call <sid>X('DiffAdd',     s:hue_4, s:visual_grey, '', '')
-  call <sid>X('DiffChange',  s:hue_6, s:visual_grey, '', '')
-  call <sid>X('DiffDelete',  s:hue_5, s:visual_grey, '', '')
+  call <sid>X('DiffAdd',     s:hue_4, s:visual_grey, '')
+  call <sid>X('DiffChange',  s:hue_6, s:visual_grey, '')
+  call <sid>X('DiffDelete',  s:hue_5, s:visual_grey, '')
   hi! link DiffText OneHue2
-  call <sid>X('DiffAdded',   s:hue_4, s:visual_grey, '', '')
-  call <sid>X('DiffFile',    s:hue_5, s:visual_grey, '', '')
-  call <sid>X('DiffNewFile', s:hue_4, s:visual_grey, '', '')
+  call <sid>X('DiffAdded',   s:hue_4, s:visual_grey, '')
+  call <sid>X('DiffFile',    s:hue_5, s:visual_grey, '')
+  call <sid>X('DiffNewFile', s:hue_4, s:visual_grey, '')
   hi! link DiffLine OneHue2
-  call <sid>X('DiffRemoved', s:hue_5, s:visual_grey, '', '')
+  call <sid>X('DiffRemoved', s:hue_5, s:visual_grey, '')
   " }}}
 
   " Asciidoc highlighting ---------------------------------------------------{{{
@@ -542,12 +542,12 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
   hi! link cucumberThen OneHue2
   hi! link cucumberThenAnd OneHue2
   hi! link cucumberUnparsed OneHue6
-  call <sid>X('cucumberFeature',         s:hue_5,  '', 'bold', '')
+  call <sid>X('cucumberFeature',         s:hue_5,  '', 'bold')
   hi! link cucumberBackground OneHue3
   hi! link cucumberScenario OneHue3
   hi! link cucumberScenarioOutline OneHue3
-  call <sid>X('cucumberTags',            s:mono_3, '', 'bold', '')
-  call <sid>X('cucumberDelimiter',       s:mono_3, '', 'bold', '')
+  call <sid>X('cucumberTags',            s:mono_3, '', 'bold')
+  call <sid>X('cucumberDelimiter',       s:mono_3, '', 'bold')
   " }}}
 
   " CSS/Sass highlighting ---------------------------------------------------{{{
@@ -605,16 +605,16 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
   " Git and git related plugins highlighting --------------------------------{{{
   hi! link gitcommitComment OneMono3
   hi! link gitcommitUnmerged OneHue4
-  call <sid>X('gitcommitOnBranch',      '',        '', '', '')
+  call <sid>X('gitcommitOnBranch',      '',        '', '')
   hi! link gitcommitBranch OneHue3
   hi! link gitcommitDiscardedType OneHue5
   hi! link gitcommitSelectedType OneHue4
-  call <sid>X('gitcommitHeader',        '',        '', '', '')
+  call <sid>X('gitcommitHeader',        '',        '', '')
   hi! link gitcommitUntrackedFile OneHue1
   hi! link gitcommitDiscardedFile OneHue5
   hi! link gitcommitSelectedFile OneHue4
   hi! link gitcommitUnmergedFile OneHue62
-  call <sid>X('gitcommitFile',          '',        '', '', '')
+  call <sid>X('gitcommitFile',          '',        '', '')
   hi! link gitcommitNoBranch       gitcommitBranch
   hi! link gitcommitUntracked      gitcommitComment
   hi! link gitcommitDiscarded      gitcommitComment
@@ -726,21 +726,21 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
   hi! link jsonCommentError OneMono1
   hi! link jsonKeyword OneHue5
   hi! link jsonQuote OneMono3
-  call <sid>X('jsonTrailingCommaError',   s:hue_5,   '', 'reverse' , '')
-  call <sid>X('jsonMissingCommaError',    s:hue_5,   '', 'reverse' , '')
-  call <sid>X('jsonNoQuotesError',        s:hue_5,   '', 'reverse' , '')
-  call <sid>X('jsonNumError',             s:hue_5,   '', 'reverse' , '')
+  call <sid>X('jsonTrailingCommaError',   s:hue_5,   '', 'reverse' )
+  call <sid>X('jsonMissingCommaError',    s:hue_5,   '', 'reverse' )
+  call <sid>X('jsonNoQuotesError',        s:hue_5,   '', 'reverse' )
+  call <sid>X('jsonNumError',             s:hue_5,   '', 'reverse' )
   hi! link jsonString OneHue4
   hi! link jsonBoolean OneHue3
   hi! link jsonNumber OneHue6
-  call <sid>X('jsonStringSQError',        s:hue_5,   '', 'reverse' , '')
-  call <sid>X('jsonSemicolonError',       s:hue_5,   '', 'reverse' , '')
+  call <sid>X('jsonStringSQError',        s:hue_5,   '', 'reverse' )
+  call <sid>X('jsonSemicolonError',       s:hue_5,   '', 'reverse' )
   " }}}
 
   " Markdown highlighting ---------------------------------------------------{{{
   hi! link markdownUrl OneMono3
-  call <sid>X('markdownBold',             s:hue_6,   '', 'bold', '')
-  call <sid>X('markdownItalic',           s:hue_6,   '', 'bold', '')
+  call <sid>X('markdownBold',             s:hue_6,   '', 'bold')
+  call <sid>X('markdownItalic',           s:hue_6,   '', 'bold')
   hi! link markdownCode OneHue4
   hi! link markdownCodeBlock OneHue5
   hi! link markdownCodeDelimiter OneHue4
@@ -769,7 +769,7 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
   " Pug (Formerly Jade) highlighting ----------------------------------------{{{
   hi! link pugAttributesDelimiter OneHue6
   hi! link pugClass OneHue6
-  call <sid>X('pugDocType',               s:mono_3,   '', s:italic, '')
+  call <sid>X('pugDocType',               s:mono_3,   '', s:italic)
   hi! link pugTag OneHue5
   " }}}
 
@@ -789,7 +789,7 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
   hi! link pythonStatement OneHue3
   hi! link pythonParam OneHue6
   hi! link pythonEscape OneHue5
-  call <sid>X('pythonSelf',                 s:mono_2,    '', s:italic, '')
+  call <sid>X('pythonSelf',                 s:mono_2,    '', s:italic)
   hi! link pythonClass OneHue2
   hi! link pythonOperator OneHue3
   hi! link pythonEscape OneHue5
@@ -835,11 +835,11 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
 
   " Vim highlighting --------------------------------------------------------{{{
   hi! link vimCommand OneHue3
-  call <sid>X('vimCommentTitle', s:mono_3, '', 'bold', '')
+  call <sid>X('vimCommentTitle', s:mono_3, '', 'bold')
   hi! link vimFunction OneHue1
   hi! link vimFuncName OneHue3
   hi! link vimHighlight OneHue2
-  call <sid>X('vimLineComment',  s:mono_3, '', s:italic, '')
+  call <sid>X('vimLineComment',  s:mono_3, '', s:italic)
   hi! link vimParenSep OneMono2
   hi! link vimSep OneMono2
   hi! link vimUserFunc OneHue1
@@ -866,7 +866,7 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
   " }}}
 
   " Rust highlighting -------------------------------------------------------{{{
-  call <sid>X('rustExternCrate',          s:hue_5,    '', 'bold', '')
+  call <sid>X('rustExternCrate',          s:hue_5,    '', 'bold')
   hi! link rustIdentifier OneHue2
   hi! link rustDeriveTrait OneHue4
   hi! link SpecialComment OneMono3
