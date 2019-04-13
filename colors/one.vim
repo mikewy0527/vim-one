@@ -244,16 +244,16 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
       let l:attr= 'none'
     endif
 
-    let l:bg = ""
-    let l:fg = ""
+    let l:bg = substitute(a:bg, '#', '', '')
+    let l:fg = substitute(a:fg, '#', '', '')
     let l:decoration = ""
 
     if a:bg != ''
-      let l:bg = " guibg=#" . a:bg . " ctermbg=" . <SID>rgb(a:bg)
+      let l:bg = " guibg=#" . l:bg . " ctermbg=" . <SID>rgb(l:bg)
     endif
 
     if a:fg != ''
-      let l:fg = " guifg=#" . a:fg . " ctermfg=" . <SID>rgb(a:fg)
+      let l:fg = " guifg=#" . l:fg . " ctermfg=" . <SID>rgb(l:fg)
     endif
 
     if a:attr != ''
