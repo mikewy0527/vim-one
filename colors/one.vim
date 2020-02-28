@@ -312,7 +312,6 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
 
   " }}}
 
-
   " Color definition --------------------------------------------------------{{{
   let s:dark = 0
   if &background ==# 'dark'
@@ -755,6 +754,18 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
   hi! link markdownH5 OneHue5
   hi! link markdownH6 OneHue5
   hi! link markdownListMarker OneHue5
+  " }}}
+
+  " Perl highlighting -------------------------------------------------------{{{
+  call <sid>X('perlFunction',      s:hue_3,     '', '')
+  call <sid>X('perlMethod',        s:syntax_fg, '', '')
+  call <sid>X('perlPackageConst',  s:hue_3,     '', '')
+  call <sid>X('perlPOD',           s:mono_3,    '', '')
+  call <sid>X('perlSubName',       s:syntax_fg, '', '')
+  call <sid>X('perlSharpBang',     s:mono_3,    '', '')
+  call <sid>X('perlSpecialString', s:hue_4,     '', '')
+  call <sid>X('perlVarPlain',      s:hue_2,     '', '')
+  call <sid>X('podCommand',        s:mono_3,    '', '')
   " }}}
 
   " PHP highlighting --------------------------------------------------------{{{
