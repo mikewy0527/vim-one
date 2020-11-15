@@ -33,6 +33,7 @@ endif
 let s:italic = ''
 if g:one_allow_italics == 1
   let s:italic = 'italic'
+  let s:bold_italic = 'bold,italic'
 endif
 
 if !exists('g:one_termcolors')
@@ -740,7 +741,8 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
   " Markdown highlighting ---------------------------------------------------{{{
   hi! link markdownUrl OneMono3
   call <sid>X('markdownBold',             s:hue_6,   '', 'bold')
-  call <sid>X('markdownItalic',           s:hue_6,   '', 'bold')
+  call <sid>X('markdownItalic',           s:hue_6,   '', s:italic)
+  call <sid>X('markdownBoldItalic',       s:hue_6,   '', s:bold_italic)
   hi! link markdownCode OneHue4
   hi! link markdownCodeBlock OneHue5
   hi! link markdownCodeDelimiter OneHue4
