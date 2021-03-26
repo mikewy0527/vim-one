@@ -899,7 +899,7 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
   " ALE (Asynchronous Lint Engine) highlighting -----------------------------{{{
   hi! link ALEWarningSign OneHue62
   hi! link ALEErrorSign OneHue5
-
+  " }}}
 
   " Neovim NERDTree Background fix ------------------------------------------{{{
   hi! link NERDTreeFile OneSyntaxFg
@@ -924,6 +924,7 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
     let g:terminal_color_7  = "#e3e5e9"
     let g:terminal_color_15 = "#e3e5e9"
   endif
+  " }}}
 
   " Delete functions =========================================================={{{
   " delf <SID>X

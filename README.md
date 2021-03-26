@@ -7,16 +7,23 @@ feature.
 
 ## Everything You Should Know about This Fork
 
-It seems rakr stopped maintaining the original repo and there's been
+~~It seems rakr stopped maintaining the original repo and there's been
 no response for the pull requests since March 2018, although he still
 uses GitHub once in a while from what we know about the contribution
-graph. Hence, I decide to stop opening pr and updates in my own fork.
+graph.~~ Although rakr failed to resolve a merge conflict,
+my optimization fix was added manually at last.
+
+The original repo lacks maintenance. The author checks PRs about once a season?
+And the accepted PRs even introduced bugs, which let me suspect
+if there's any code review being done.
+I'll just stop opening pr to it and keep updates in my own fork.
 
 Changes made on this fork
-- reduce theme loading time from 170 ms to 18 ms by
-  - hard coding the 256 color, see [pr_93]
-  - reusing highlight definitions with predefined groups (`hi link`)
-- color palette customization support
+
+* reduce theme loading time from 170 ms to 18 ms by
+  * hard coding the 256 color, see [pr_93]
+  * reusing highlight definitions with predefined groups (`hi link`)
+* color palette customization support
 
 |                              | loading time           |
 | ---------------------------- | ---------------------- |
@@ -26,12 +33,14 @@ Changes made on this fork
 | custom `syntax_bg` only      | 20.232 ms              |
 
 ### Color Palette Customization
+
 This feature is **not** designed to change **the whole color palette**
 of `vim-one`. The language specific highlights are based on the default
 `vim-one` color palette. Redefining a completely different palette may
 result in ugly highlights.
 
 #### Usage
+
 For example, we can change the background color by defining global variable
 
 ```viml
@@ -41,11 +50,12 @@ let g:one_dark_syntax_bg='#123456'
 ```
 
 All available color palette keywords are as follows,
-- `mono_1`, `mono_2`, `mono_3`, `mono_4`
-- `hue_1`, `hue_2`, `hue_3`, `hue_4`, `hue_5`, `hue_5_2`, `hue_6`, `hue_6_2`
-- `syntax_bg`, `syntax_gutter`, `syntax_cursor`, `syntax_accent`, `syntax_accent_2`
-- `vertsplit`, `special_grey`, `visual_grey`, `pmenu`
-- `syntax_fg`, `syntax_fold_bg`
+
+* `mono_1`, `mono_2`, `mono_3`, `mono_4`
+* `hue_1`, `hue_2`, `hue_3`, `hue_4`, `hue_5`, `hue_5_2`, `hue_6`, `hue_6_2`
+* `syntax_bg`, `syntax_gutter`, `syntax_cursor`, `syntax_accent`, `syntax_accent_2`
+* `vertsplit`, `special_grey`, `visual_grey`, `pmenu`
+* `syntax_fg`, `syntax_fold_bg`
 
 Prefix these keywords with `one_dark_` for dark color scheme
 and `one_light_` for the light. Browse the source code for more detail.
