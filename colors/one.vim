@@ -487,11 +487,9 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
   hi! link StorageClass OneHue62
   hi! link Structure OneHue62
   hi! link Typedef OneHue62
-  hi! link Special OneHue2
   call <sid>X('SpecialChar',    '',              '',          '')
   call <sid>X('Tag',            '',              '',          '')
   call <sid>X('Delimiter',      '',              '',          '')
-  call <sid>X('SpecialComment', '',              '',          '')
   call <sid>X('Debug',          '',              '',          '')
   call <sid>X('Underlined',     '',              '',          'underline')
   call <sid>X('Ignore',         '',              '',          '')
@@ -636,8 +634,6 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
   hi! link GitGutterAdd    SignifySignAdd
   hi! link GitGutterChange SignifySignChange
   hi! link GitGutterDelete SignifySignDelete
-  hi! link diffAdded OneHue4
-  hi! link diffRemoved OneHue5
   " }}}
 
   " Go highlighting ---------------------------------------------------------{{{
@@ -677,7 +673,6 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
 
   hi! link javaScriptBraces OneMono2
   hi! link javaScriptFunction OneHue3
-  hi! link javaScriptIdentifier OneHue3
   hi! link javaScriptNull OneHue6
   hi! link javaScriptNumber OneHue6
   hi! link javaScriptRequire OneHue1
@@ -756,7 +751,6 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
   hi! link markdownH1 OneHue5
   hi! link markdownH2 OneHue5
   hi! link markdownH3 OneHue5
-  hi! link markdownH3 OneHue5
   hi! link markdownH4 OneHue5
   hi! link markdownH5 OneHue5
   hi! link markdownH6 OneHue5
@@ -812,7 +806,6 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
   call <sid>X('pythonSelf',                 s:mono_2,    '', s:italic)
   hi! link pythonClass OneHue2
   hi! link pythonOperator OneHue3
-  hi! link pythonEscape OneHue5
   hi! link pythonFunction OneHue2
   hi! link pythonKeyword OneHue2
   hi! link pythonModule OneHue3
