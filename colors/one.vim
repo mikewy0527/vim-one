@@ -500,6 +500,22 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
   call <sid>X('DiffNewFile', s:hue_4, s:visual_grey, '')
   hi! link DiffLine OneHue2
   call <sid>X('DiffRemoved', s:hue_5, s:visual_grey, '')
+
+  " runtime/syntax/diff.vim
+  " Don't use bg, unlike vimdiff view, the bg color is not rendered full width
+  " in diff syntax (patch file)
+  " diff headers
+  hi! link DiffIndexLine Title
+  hi! link DiffLine      Title
+  hi! link DiffSubname   OneHue62
+  hi! link DiffFile      Title
+  hi! link DiffNewFile   OneHue4
+  hi! link DiffOldFile   OneHue5
+  " diff content
+  hi! link DiffAdded   OneHue4
+  hi! link DiffRemoved OneHue5
+  hi! link DiffChanged OneHue2
+  hi! link DiffComment Comment
   " }}}
 
   " Asciidoc highlighting ---------------------------------------------------{{{
