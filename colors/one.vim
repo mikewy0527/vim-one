@@ -502,18 +502,24 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
   " }}}
 
   " Diff highlighting -------------------------------------------------------{{{
-  call <sid>X('DiffAdd',     s:hue_4, s:visual_grey, '')
-  call <sid>X('DiffChange',  s:hue_6, s:visual_grey, '')
-  call <sid>X('DiffDelete',  s:hue_5, s:visual_grey, '')
-  hi! link DiffText OneHue2
-  call <sid>X('DiffAdded',   s:hue_4, s:visual_grey, '')
-  call <sid>X('DiffFile',    s:hue_5, s:visual_grey, '')
-  call <sid>X('DiffNewFile', s:hue_4, s:visual_grey, '')
-  hi! link DiffLine OneHue2
-  call <sid>X('DiffRemoved', s:hue_5, s:visual_grey, '')
+  " :h diff
+  " Vimdiff color source, from
+  " - red, green from Atom One
+  " - purple from Kaledoscope
+  if &background == 'light'
+    call <sid>XAPI('DiffAdd',    '#022B00',   '#D9FBE3', '')
+    call <sid>XAPI('DiffDelete', '#FBE1E4',   '#FBE1E4', 'none')
+    call <sid>XAPI('DiffChange', s:mono_1[0], '#F6F1FF', '')
+    call <sid>XAPI('DiffText',   '#1E162F',   '#D4BDFF', 'none')
+  elseif &background == 'dark'
+    call <sid>XAPI('DiffAdd',    '#D9FBE3',   '#264B3A', '')
+    call <sid>XAPI('DiffDelete', '#48313B',   '#48313B', 'none')
+    call <sid>XAPI('DiffChange', s:mono_1[0], '#3B2C5C', '')
+    call <sid>XAPI('DiffText',   '#F6F1FF',   '#6548A3', 'none')
+  endif
 
-  " runtime/syntax/diff.vim
-  " Don't use bg, unlike vimdiff view, the bg color is not rendered full width
+  " For patch like format file, defined in runtime/syntax/diff.vim
+  " Don't use bg, unlike vimdiff view, the bg color is not rendered in full width
   " in diff syntax (patch file)
   " diff headers
   hi! link DiffIndexLine Title
