@@ -19,12 +19,16 @@ if exists("*<SID>X")
   delf <SID>user_color_palette
 endif
 
+" Remove all existing highlighting and set the defaults.
 hi clear
-syntax reset
-if exists('g:colors_name')
-  unlet g:colors_name
+
+" Load the syntax highlighting defaults, if it's enabled.
+if exists("syntax_on")
+  syntax reset
 endif
+
 let g:colors_name = 'one'
+let colors_name = 'one'
 
 if !exists('g:one_allow_italics')
   let g:one_allow_italics = 0
