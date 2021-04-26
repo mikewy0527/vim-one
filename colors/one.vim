@@ -31,6 +31,7 @@ if !exists('g:one_allow_italics')
 endif
 
 let s:italic = ''
+let s:bold_italic = ''
 if g:one_allow_italics == 1
   let s:italic = 'italic'
   let s:bold_italic = 'bold,italic'
