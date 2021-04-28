@@ -423,7 +423,7 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
   call <sid>X('VertSplit',    s:vertsplit,     '',               'none')
   call <sid>X('Folded',       s:syntax_bg,     s:syntax_fold_bg, 'none')
   call <sid>X('FoldColumn',   s:mono_3,        s:syntax_cursor,  '')
-  hi! link IncSearch OneHue6
+  call <sid>X('IncSearch',    s:hue_6,         '',               'reverse')
   hi! link LineNr OneMono4
   call <sid>X('CursorLineNr', s:syntax_fg,     s:syntax_cursor,  'none')
   call <sid>X('MatchParen',   s:hue_5,         s:syntax_cursor,  'underline,bold')
@@ -440,7 +440,7 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
   call <sid>X('SpecialKey',   s:special_grey,  '',               'none')
   call <sid>X('Whitespace',   s:special_grey,  '',               'none')
   call <sid>X('StatusLine',   s:syntax_fg,     s:syntax_cursor,  'none')
-  hi! link StatusLineNC OneMono3
+  call <sid>X('StatusLineNC', s:mono_3,        '',               'reverse')
   call <sid>X('TabLine',      s:mono_2,        s:visual_grey,    'none')
   call <sid>X('TabLineFill',  s:mono_3,        s:visual_grey,    'none')
   call <sid>X('TabLineSel',   s:syntax_bg,     s:hue_2,          '')
