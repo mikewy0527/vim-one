@@ -242,8 +242,8 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
   " sets the highlighting for the given group
   fun <SID>XAPI(group, fg, bg, attr)
     let l:attr = a:attr
-    if g:one_allow_italics == 0 && l:attr ==? 'italic'
-      let l:attr= 'none'
+    if l:attr ==? 'italic' && g:one_allow_italics == 0
+      let l:attr= 'NONE'
     endif
 
     let l:bg = substitute(a:bg, '#', '', '')
@@ -252,21 +252,23 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
 
     if a:bg != ''
       let l:bg = " guibg=#" . l:bg . " ctermbg=" . <SID>rgb(l:bg)
+    else
+      let l:bg = " guibg=NONE ctermbg=NONE"
     endif
 
     if a:fg != ''
       let l:fg = " guifg=#" . l:fg . " ctermfg=" . <SID>rgb(l:fg)
+    else
+      let l:fg = " guifg=NONE ctermfg=NONE"
     endif
 
-    if a:attr != ''
+    if l:attr != ''
       let l:decoration = " gui=" . l:attr . " cterm=" . l:attr
+    else
+      let l:decoration = " gui=NONE cterm=NONE"
     endif
 
-    let l:exec = l:fg . l:bg . l:decoration
-
-    if l:exec != ''
-      exec "hi " . a:group . l:exec
-    endif
+    exec "hi " . a:group . l:fg . l:bg . l:decoration
 
   endfun
 
@@ -274,22 +276,26 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
   " the original one is borrowed from mhartington/oceanic-next
   function! <SID>X(group, fg, bg, attr, ...)
     let l:attrsp = get(a:, 1, "")
-    " fg, bg, attr, attrsp
+
     if !empty(a:fg)
-      exec "hi " . a:group . " guifg=" .  a:fg[0]
-      exec "hi " . a:group . " ctermfg=" . a:fg[1]
+      let l:fg = " guifg=" . a:fg[0] . " ctermfg=" . a:fg[1]
+    else
+      let l:fg = " guifg=NONE ctermfg=NONE"
     endif
+
     if !empty(a:bg)
-      exec "hi " . a:group . " guibg=" .  a:bg[0]
-      exec "hi " . a:group . " ctermbg=" . a:bg[1]
+      let l:bg = " guibg=" . a:bg[0] . " ctermbg=" . a:bg[1]
+    else
+      let l:bg = " guibg=NONE ctermbg=NONE"
     endif
-    if a:attr != ""
-      exec "hi " . a:group . " gui=" .   a:attr
-      exec "hi " . a:group . " cterm=" . a:attr
+
+    if !empty(a:attr)
+      let l:attr = " gui=" . a:attr . " cterm=" . a:attr
+    else
+      let l:attr = " gui=NONE cterm=NONE"
     endif
-    if !empty(l:attrsp)
-      exec "hi " . a:group . " guisp=" . l:attrsp[0]
-    endif
+
+    exec "hi " . a:group . l:fg . l:bg . l:attr
   endfun
 
   " replace predefined colors with user defined ones
