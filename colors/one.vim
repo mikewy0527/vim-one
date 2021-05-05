@@ -502,15 +502,37 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
   " }}}
 
   " Diff highlighting -------------------------------------------------------{{{
-  call <sid>X('DiffAdd',     s:hue_4, s:visual_grey, '')
-  call <sid>X('DiffChange',  s:hue_6, s:visual_grey, '')
-  call <sid>X('DiffDelete',  s:hue_5, s:visual_grey, '')
-  hi! link DiffText OneHue2
-  call <sid>X('DiffAdded',   s:hue_4, s:visual_grey, '')
-  call <sid>X('DiffFile',    s:hue_5, s:visual_grey, '')
-  call <sid>X('DiffNewFile', s:hue_4, s:visual_grey, '')
-  hi! link DiffLine OneHue2
-  call <sid>X('DiffRemoved', s:hue_5, s:visual_grey, '')
+  " :h diff
+  " Vimdiff color source, from
+  " - red, green from Atom One
+  " - purple from Kaledoscope
+  if &background == 'light'
+    call <sid>X('DiffAdd',    ['#022B00', 'none'], ['#D9FBE3', 'none'], '')
+    call <sid>X('DiffDelete', ['#FBE1E4', 'none'], ['#FBE1E4', 'none'], 'none')
+    call <sid>X('DiffChange', s:mono_1,            ['#F6F1FF', 'none'], '')
+    call <sid>X('DiffText',   ['#1E162F', 'none'], ['#D4BDFF', 'none'], 'none')
+  elseif &background == 'dark'
+    call <sid>X('DiffAdd',    ['#D9FBE3', 'none'], ['#264B3A', 'none'], '')
+    call <sid>X('DiffDelete', ['#48313B', 'none'], ['#48313B', 'none'],  'none')
+    call <sid>X('DiffChange', s:mono_1,            ['#3B2C5C', 'none'], '')
+    call <sid>X('DiffText',   ['#F6F1FF', 'none'], ['#6548A3', 'none'], 'none')
+  endif
+
+  " For patch like format file, defined in runtime/syntax/diff.vim
+  " Don't use bg, unlike vimdiff view, the bg color is not rendered in full width
+  " in diff syntax (patch file)
+  " diff headers
+  hi! link DiffIndexLine Title
+  hi! link DiffLine      Title
+  hi! link DiffSubname   OneHue62
+  hi! link DiffFile      Title
+  hi! link DiffNewFile   OneHue4
+  hi! link DiffOldFile   OneHue5
+  " diff content
+  hi! link DiffAdded   OneHue4
+  hi! link DiffRemoved OneHue5
+  hi! link DiffChanged OneHue2
+  hi! link DiffComment Comment
   " }}}
 
   " Asciidoc highlighting ---------------------------------------------------{{{
@@ -950,6 +972,10 @@ endif
 " Public API --------------------------------------------------------------{{{
 function! one#highlight(group, fg, bg, attr)
   call <sid>XAPI(a:group, a:fg, a:bg, a:attr)
+endfunction
+
+function! one#rgb(c)
+  return <sid>rgb(a:c)
 endfunction
 "}}}
 
