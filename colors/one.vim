@@ -507,15 +507,15 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
   " - red, green from Atom One
   " - purple from Kaledoscope
   if &background == 'light'
-    call <sid>XAPI('DiffAdd',    '#022B00',   '#D9FBE3', '')
-    call <sid>XAPI('DiffDelete', '#FBE1E4',   '#FBE1E4', 'none')
-    call <sid>XAPI('DiffChange', s:mono_1[0], '#F6F1FF', '')
-    call <sid>XAPI('DiffText',   '#1E162F',   '#D4BDFF', 'none')
+    call <sid>X('DiffAdd',    ['#022B00', 'none'], ['#D9FBE3', 'none'], '')
+    call <sid>X('DiffDelete', ['#FBE1E4', 'none'], ['#FBE1E4', 'none'], 'none')
+    call <sid>X('DiffChange', s:mono_1,            ['#F6F1FF', 'none'], '')
+    call <sid>X('DiffText',   ['#1E162F', 'none'], ['#D4BDFF', 'none'], 'none')
   elseif &background == 'dark'
-    call <sid>XAPI('DiffAdd',    '#D9FBE3',   '#264B3A', '')
-    call <sid>XAPI('DiffDelete', '#48313B',   '#48313B', 'none')
-    call <sid>XAPI('DiffChange', s:mono_1[0], '#3B2C5C', '')
-    call <sid>XAPI('DiffText',   '#F6F1FF',   '#6548A3', 'none')
+    call <sid>X('DiffAdd',    ['#D9FBE3', 'none'], ['#264B3A', 'none'], '')
+    call <sid>X('DiffDelete', ['#48313B', 'none'], ['#48313B', 'none'],  'none')
+    call <sid>X('DiffChange', s:mono_1,            ['#3B2C5C', 'none'], '')
+    call <sid>X('DiffText',   ['#F6F1FF', 'none'], ['#6548A3', 'none'], 'none')
   endif
 
   " For patch like format file, defined in runtime/syntax/diff.vim
@@ -972,6 +972,10 @@ endif
 " Public API --------------------------------------------------------------{{{
 function! one#highlight(group, fg, bg, attr)
   call <sid>XAPI(a:group, a:fg, a:bg, a:attr)
+endfunction
+
+function! one#rgb(c)
+  return <sid>rgb(a:c)
 endfunction
 "}}}
 
