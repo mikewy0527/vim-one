@@ -5,11 +5,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## TODO
-
-- [ ] Dropped 256 color support, so ugly and used by no one
-
 ## [Unreleased]
+
+## [2.0.0]
 
 ### Added
 
@@ -32,4 +30,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [rakr-gh-93]: https://github.com/rakr/vim-one/pull/93
 [rakr-gh-95]: https://github.com/rakr/vim-one/pull/95
 [lk-#1]: https://github.com/laggardkernel/vim-one/issues/1
-[Unreleased]: https://github.com/laggardkernel/vim-one/compare/08aca1b...HEAD
+[Unreleased]: https://github.com/laggardkernel/vim-one/compare/2.0.0...HEAD
+[2.0.0]: https://github.com/laggardkernel/vim-one/releases/tag/1.0.0
