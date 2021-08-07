@@ -331,17 +331,42 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
     let s:mono_2 = ['#828997', '102']
     let s:mono_3 = ['#5c6370', '59']
     let s:mono_4 = ['#4b5263', '59']
+    let s:mono_5 = ['#878700', '100'] " yellow 4
 
     let s:hue_1  = ['#56b6c2', '73'] " cyan
-    let s:hue_2  = ['#61afef', '75'] " blue
-    let s:hue_3  = ['#c678dd', '176'] " purple
-    let s:hue_4  = ['#98c379', '114'] " green
+
+    let s:hue_2   = ['#61afef', '75'] " blue
+    let s:hue_2_2 = ['#52a8ff', '69']
+    let s:hue_2_3 = ['#005fff', '27']
+    let s:hue_2_4 = ['#0000ff', '21']
+
+    let s:hue_3   = ['#c678dd', '176'] " purple
+    let s:hue_3_2 = ['#af5f87', '132'] " hotpink
+    let s:hue_3_3 = ['#af87ff', '141'] " mediumpurple
+
+    let s:hue_4   = ['#98c379', '114'] " green 1
+    let s:hue_4_2 = ['#87875f', '101'] " wheet
+    let s:hue_4_3 = ['#008700', '28'] " green 2
+    let s:hue_4_4 = ['#77b04f', '114'] " green 3
 
     let s:hue_5   = ['#e06c75', '168'] " red 1
-    let s:hue_5_2 = ['#be5046', '130'] " red 2
+    let s:hue_5_2 = ['#be5046', '131'] " red 2
+    let s:hue_5_3 = ['#b30000', '160'] " red 3
+    let s:hue_5_4 = ['#b83d14', '131'] " red 4
 
     let s:hue_6   = ['#d19a66', '173'] " orange 1
     let s:hue_6_2 = ['#e5c07b', '180'] " orange 2
+    let s:hue_6_3 = ['#e66700', '166'] " green
+    let s:hue_6_4 = ['#af5f00', '130'] " orange 3
+
+    let s:hue_7   = ['#87af00', '106']
+    let s:hue_7_2 = ['#5fd75f', '77']
+    let s:hue_7_3 = ['#00d700', '40']
+
+    let s:hue_8   = ['#7db300', '64'] " green 3
+    let s:hue_8_2 = ['#5f8700', '64'] " green 3
+
+    let s:hue_9  = ['#5f5fd7', '62']
 
     let s:syntax_bg     = ['#282c34', '16']
     let s:syntax_gutter = ['#636d83', '60']
@@ -363,17 +388,41 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
     let s:mono_2 = ['#696c77', '60']
     let s:mono_3 = ['#a0a1a7', '145']
     let s:mono_4 = ['#c2c2c3', '250']
+    let s:mono_5 = ['#8cb464', '108']
 
     let s:hue_1  = ['#0184bc', '31'] " cyan
-    let s:hue_2  = ['#4078f2', '33'] " blue
-    let s:hue_3  = ['#a626a4', '127'] " purple
-    let s:hue_4  = ['#50a14f', '71'] " green
+
+    let s:hue_2   = ['#4078f2', '33'] " blue
+    let s:hue_2_2 = ['#0087d7', '32'] " deep skyblue
+    let s:hue_2_3 = ['#00af00', '34'] " green 2
+    let s:hue_2_4 = ['#005f00', '22'] " green 3
+
+    let s:hue_3   = ['#a626a4', '127'] " purple
+    let s:hue_3_2 = ['#8787ff', '105'] " purple
+    let s:hue_3_3 = ['#d700af', '163'] " purple
+
+    let s:hue_4   = ['#50a14f', '71'] " green
+    let s:hue_4_2 = ['#008700', '28'] " green 2
+    let s:hue_4_3 = ['#00af87', '36'] " darkcyan
+    let s:hue_4_4 = ['#005f00', '22'] " green 3
 
     let s:hue_5   = ['#e45649', '166'] " red 1
-    let s:hue_5_2 = ['#ca1243', '160'] " red 2
+    let s:hue_5_2 = ['#d78700', '172'] " orange 2
+    let s:hue_5_3 = ['#ff0000', '160'] " red 3
+    let s:hue_5_4 = ['#b83d14', '131'] " red 4
 
     let s:hue_6   = ['#986801', '94'] " orange 1
-    let s:hue_6_2 = ['#c18401', '136'] " orange 2
+    let s:hue_6_2 = ['#d75f00', '166'] " orange 3
+    let s:hue_6_3 = ['#ca1243', '160'] " red 2
+
+    let s:hue_7   = ['#ff00ff', '201']
+    let s:hue_7_2 = ['#ff00ff', '171']
+    let s:hue_7_3 = ['#d700ff', '165']
+
+    let s:hue_8   = ['#005fff', '27']
+    let s:hue_8_2 = ['#0000ff', '21']
+
+    let s:hue_9  = ['#875fff', '99']
 
     let s:syntax_bg     = ['#fafafa', '255']
     let s:syntax_gutter = ['#9e9e9e', '247']
@@ -400,15 +449,32 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
   call <sid>X('OneMono2', s:mono_2, '', '')
   call <sid>X('OneMono3', s:mono_3, '', '')
   call <sid>X('OneMono4', s:mono_4, '', '')
+  call <sid>X('OneMono5', s:mono_5, '', '')
 
   call <sid>X('OneHue1', s:hue_1, '', '')
   call <sid>X('OneHue2', s:hue_2, '', '')
+  call <sid>X('OneHue22', s:hue_2_2, '', '')
+  call <sid>X('OneHue23', s:hue_2_3, '', '')
+  call <sid>X('OneHue24', s:hue_2_4, '', '')
   call <sid>X('OneHue3', s:hue_3, '', '')
+  call <sid>X('OneHue32', s:hue_3_2, '', '')
+  call <sid>X('OneHue33', s:hue_3_3, '', '')
   call <sid>X('OneHue4', s:hue_4, '', '')
+  call <sid>X('OneHue42', s:hue_4_2, '', '')
+  call <sid>X('OneHue43', s:hue_4_3, '', '')
   call <sid>X('OneHue5', s:hue_5, '', '')
   call <sid>X('OneHue52', s:hue_5_2, '', '')
+  call <sid>X('OneHue53', s:hue_5_3, '', '')
+  call <sid>X('OneHue54', s:hue_5_4, '', '')
   call <sid>X('OneHue6', s:hue_6, '', '')
   call <sid>X('OneHue62', s:hue_6_2, '', '')
+  call <sid>X('OneHue63', s:hue_6_3, '', '')
+  call <sid>X('OneHue7', s:hue_7, '', '')
+  call <sid>X('OneHue72', s:hue_7_2, '', '')
+  call <sid>X('OneHue73', s:hue_7_3, '', '')
+  call <sid>X('OneHue8', s:hue_8, '', '')
+  call <sid>X('OneHue82', s:hue_8_2, '', '')
+  call <sid>X('OneHue9', s:hue_9, '', '')
 
   hi! link OneSyntaxFg OneMono1
   " }}}
@@ -540,31 +606,82 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
   " }}}
 
   " C/C++ highlighting ------------------------------------------------------{{{
+  " adjust the order similar to vim 'syntax:group-name' help
+  hi! link cComment Onemono5
+  hi! link cCommentL Comment
+
+  hi! link cConstant OneHue53
+  hi! link cString OneHue4
+  hi! link cNumber OneHue53
+  hi! link cOctal OneHue53
+  hi! link cBoolean OneHue52
+  hi! link cFloat OneHue53
+
+  hi! link cIdentifier OneHue9
+  hi! link cFunction OneHue22
+
+  hi! link cStatement OneHue3
+  hi! link cConditional OneHue63
+  hi! link cRepeat OneHue63
+  hi! link cLabel OneHue63
+  hi! link cUserLabel OneHue32
+  hi! link cOperator OneHue32
+  hi! link cCustomOperator OneHue72
+  hi! link cKeyword OneHue3
+  hi! link cSpecialKeyword OneHue63
+  hi! link cGotoKeyword OneHue53
+  hi! link cExtLangKeyword OneHue53
+
+  hi! link cPreProc OneHue52
   hi! link cInclude OneHue3
-  hi! link cPreCondit OneHue3
-  hi! link cPreConditMatch OneHue3
+  hi! link cDefine OneHue32
+  hi! link cMacro OneHue52
+  hi! link cPreCondit OneHue52
+  hi! link cPreConditMatch OneHue52
 
   hi! link cType OneHue3
   hi! link cStorageClass OneHue3
   hi! link cStructure OneHue3
-  hi! link cOperator OneHue3
-  hi! link cStatement OneHue3
-  hi! link cTODO OneHue3
-  hi! link cConstant OneHue6
+  hi! link cTypedef OneHue3
+  hi! link cMemberVar OneHue43
+  hi! link cStructDeclare OneHue23
+
   hi! link cSpecial OneHue1
   hi! link cSpecialCharacter OneHue1
-  hi! link cString OneHue4
+  hi! link cDelimiter OneHue9
+  hi! link cSpecialDelimiter OneHue63
+  hi! link cTODO OneHue3
+
+  hi! link cppConstant OneHue52
+  hi! link cppString OneHue4
+  hi! link cppNumber OneHue53
+  hi! link cppBoolean OneHue52
+  hi! link cppFloat OneHue53
+
+  hi! link cppIdentifier OneHue9
+
+  hi! link cppStatement OneHue63
+  hi! link cppLabel OneHue8
+  hi! link cppOperator OneHue32
+  hi! link cppCustomOperator OneHue72
+  hi! link cppKeyword OneHue72
+  hi! link cppExceptions OneHue6
+  hi! link cppSTLExceptions OneHue6
+
+  hi! link cppDelimiter OneHue9
 
   hi! link cppType OneHue3
   hi! link cppStorageClass OneHue3
-  hi! link cppStructure OneHue3
+  hi! link cppStructure OneHue63
+  hi! link cppTypedef OneHue62
+  hi! link cppTemplateImpl OneHue42
+  hi! link cppStructDeclare OneHue23
+
   hi! link cppModifier OneHue3
-  hi! link cppOperator OneHue3
-  hi! link cppAccess OneHue3
-  hi! link cppStatement OneHue3
-  hi! link cppConstant OneHue5
-  hi! link cCppString OneHue4
-  " }}}
+  hi! link cppAccess OneHue63
+  hi! link cppClassScope OneHue82
+  hi! link cppNamespace OneHue82
+  ".}}}
 
   " Cucumber highlighting ---------------------------------------------------{{{
   hi! link cucumberGiven OneHue2
