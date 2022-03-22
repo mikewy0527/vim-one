@@ -607,7 +607,7 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
 
   " C/C++ highlighting ------------------------------------------------------{{{
   " adjust the order similar to vim 'syntax:group-name' help
-  hi! link cComment Onemono5
+  hi! link cComment Comment
   hi! link cCommentL Comment
 
   hi! link cConstant OneHue53
